@@ -15,8 +15,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using MySql.Data.MySqlClient;
 using MySqlConnector;
+using MySqlConnector.Data.MySqlClient;
 
 namespace Keepr {
     public class Startup {
