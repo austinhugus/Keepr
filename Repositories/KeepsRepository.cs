@@ -34,22 +34,50 @@ namespace Keepr.Repositories {
             return _db.Query<Keep> (sql, new { userId });
         }
 
+        internal bool ViewKeep (Keep editKeep) {
+            throw new NotImplementedException ();
+        }
+
         internal Keep GetById (int id) {
             string sql = "SELECT * FROM keeps WHERE id = @id";
             return _db.QueryFirstOrDefault<Keep> (sql, new { id });
         }
 
-        // public bool ViewKeep (Keep keepToUpdate) {
+        public bool viewKeep (Keep keepToView) {
+            string sql = @"
+            UPDATE keeps
+            SET
+            views = @Views
+            where id = @Id";
+            int affectedRows = _db.Execute (sql, keepToView);
+            return affectedRows == 1;
+        }
 
-        // }
-
-        // internal bool ShareKeep (int id) {
-
-        // }
-
-        // internal bool Edit (Keep keepToUpdate, string userId) {
-
-        // }
+        internal bool keepKeep (Keep editKeep) {
+            string sql = @"
+            UPDATE keeps
+            SET
+            keeps = @Keeps
+            where id = @Id";
+            int affectedRows = _db.Execute (sql, editKeep);
+            return affectedRows == 1;
+        }
+        internal bool Edit (Keep editKeep, string userId) {
+            string sql = @"
+            UPDATE keeps
+            SET
+            name = @Name,
+            description = @Description,
+            img = @Img, 
+            isPrivate = @IsPrivate,
+            views = @Views, 
+            shares = @Shares,
+            keeps = @Keeps
+            WHERE id = @Id
+            AND userId = @UserId";
+            int affectedRows = _db.Execute (sql, editKeep);
+            return affectedRows == 1;
+        }
 
         internal bool Delete (int id, string userId) {
             string sql = "DELETE FROM keeps WHERE id = @id AND userId = @userId LIMIT 1";
