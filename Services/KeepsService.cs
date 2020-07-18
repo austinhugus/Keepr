@@ -30,22 +30,22 @@ namespace Keepr.Services {
             return foundKeep;
         }
 
-        internal Keep Edit (Keep keepToUpdate, string userId) {
-            Keep foundKeep = GetById (keepToUpdate.Id);
-            if (_repo.ViewKeep (keepToUpdate)) {
-                foundKeep.Views = keepToUpdate.Views;
-                return foundKeep;
-            }
-            if (_repo.ShareKeep (keepToUpdate.Id)) {
-                foundKeep.Shares = keepToUpdate.Keeps;
-                return foundKeep;
-            }
-            if (foundKeep.UserId == userId && _repo.Edit (keepToUpdate, userId)) {
-                return keepToUpdate;
-            }
-            throw new Exception ("Can't share your own Post");
+        // internal Keep Edit (Keep keepToUpdate, string userId) {
+        //     Keep foundKeep = GetById (keepToUpdate.Id);
+        //     if (_repo.ViewKeep (keepToUpdate)) {
+        //         foundKeep.Views = keepToUpdate.Views;
+        //         return foundKeep;
+        //     }
+        //     if (_repo.ShareKeep (keepToUpdate.Id)) {
+        //         foundKeep.Shares = keepToUpdate.Keeps;
+        //         return foundKeep;
+        //     }
+        //     if (foundKeep.UserId == userId && _repo.Edit (keepToUpdate, userId)) {
+        //         return keepToUpdate;
+        //     }
+        //     throw new Exception ("Can't share your own Post");
 
-        }
+        // }
 
         internal string Delete (int id, string userId) {
             Keep foundKeep = GetById (id);
