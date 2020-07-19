@@ -1,4 +1,4 @@
-$body-bg: #bdbd21;
+$body-bg: rgb(255, 254, 254);
 
 $primary: #155f59;
 $secondary: #e90e66;
@@ -34,5 +34,5 @@ $colors: (
   "cyan": $cyan,
   "white": $white,
   "gray": $gray,
-  "gray-dark": $gray-dark
+  "gray-dark": $gray-dark,
 ) !default;

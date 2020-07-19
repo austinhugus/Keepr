@@ -12,7 +12,7 @@ namespace keepr.Services
         {
             _repo = repo;
         }
-        public IEnumerable<Vault> GetById(int id, string userId)
+        public Vault GetById(int id, string userId)
         {
             var foundVault = Get(id);
             if (foundVault.UserId != userId)
@@ -30,6 +30,7 @@ namespace keepr.Services
         {
             return _repo.GetByUserId(userId);
         }
+
 
 
         public Vault Create(Vault newVault)
