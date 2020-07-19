@@ -33,7 +33,7 @@ namespace Keepr.Services {
         internal Keep Edit (Keep editKeep, string userId) {
             Keep foundKeep = GetById (editKeep.Id);
             if (foundKeep.Views < editKeep.Views) {
-                if (_repo.ViewKeep (editKeep)) {
+                if (_repo.viewKeep (editKeep)) {
                     foundKeep.Views = editKeep.Views;
                     return foundKeep;
                 }

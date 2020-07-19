@@ -1,4 +1,6 @@
 ﻿using System.Data;
+using keepr.Repositories;
+using keepr.Services;
 using Keepr.Repositories;
 using Keepr.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -9,71 +11,89 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using MySqlConnector;
 
-namespace Keepr {
-    public class Startup {
-        public Startup (IConfiguration configuration) {
+namespace Keepr
+{
+    public class Startup
+    {
+        public Startup(IConfiguration configuration)
+        {
             Configuration = configuration;
         }
 
         public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
-        public void ConfigureServices (IServiceCollection services) {
+        public void ConfigureServices(IServiceCollection services)
+        {
             //ADD USER AUTH through JWT
-            services.AddAuthentication (options => {
+            services.AddAuthentication(options =>
+            {
                 options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
                 options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-            }).AddJwtBearer (options => {
+            }).AddJwtBearer(options =>
+            {
                 options.Authority = $"https://{Configuration["Auth0:Domain"]}/";
                 options.Audience = Configuration["Auth0:Audience"];
             });
-            services.AddCors (options => {
-                options.AddPolicy ("CorsDevPolicy", builder => {
+            services.AddCors(options =>
+            {
+                options.AddPolicy("CorsDevPolicy", builder =>
+                {
                     builder
-                        .WithOrigins (new string[] {
+                        .WithOrigins(new string[] {
                             "http://localhost:8080",
                             "http://localhost:8081"
                         })
-                        .AllowAnyMethod ()
-                        .AllowAnyHeader ()
-                        .AllowCredentials ();
+                        .AllowAnyMethod()
+                        .AllowAnyHeader()
+                        .AllowCredentials();
                 });
             });
 
-            services.AddControllers ();
+            services.AddControllers();
 
             //CONNECT TO DB
-            services.AddScoped<IDbConnection> (x => CreateDbConnection ());
+            services.AddScoped<IDbConnection>(x => CreateDbConnection());
 
             //NOTE REGISTER SERVICES AND REPOSITORIES
-            services.AddTransient<KeepsService> ();
-            services.AddTransient<KeepsRepository> ();
+            services.AddTransient<KeepsService>();
+            services.AddTransient<KeepsRepository>();
+            services.AddTransient<VaultsService>();
+            services.AddTransient<VaultsRepository>();
+            services.AddTransient<VaultKeepsService>();
+            services.AddTransient<VaultKeepsRepository>();
         }
 
-        private IDbConnection CreateDbConnection () {
-            string connectionString = Configuration.GetSection ("DB").GetValue<string> ("gearhost");
-            return new MySqlConnection (connectionString);
+        private IDbConnection CreateDbConnection()
+        {
+            string connectionString = Configuration.GetSection("DB").GetValue<string>("gearhost");
+            return new MySqlConnection(connectionString);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure (IApplicationBuilder app, IWebHostEnvironment env) {
-            if (env.IsDevelopment ()) {
-                app.UseDeveloperExceptionPage ();
-                app.UseCors ("CorsDevPolicy");
-            } else {
-                app.UseHsts ();
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        {
+            if (env.IsDevelopment())
+            {
+                app.UseDeveloperExceptionPage();
+                app.UseCors("CorsDevPolicy");
+            }
+            else
+            {
+                app.UseHsts();
             }
 
             // app.UseHttpsRedirection();
-            app.UseRouting ();
+            app.UseRouting();
 
-            app.UseAuthentication ();
-            app.UseAuthorization ();
+            app.UseAuthentication();
+            app.UseAuthorization();
 
-            app.UseDefaultFiles ();
-            app.UseStaticFiles ();
-            app.UseEndpoints (endpoints => {
-                endpoints.MapControllers ();
+            app.UseDefaultFiles();
+            app.UseStaticFiles();
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllers();
             });
         }
     }

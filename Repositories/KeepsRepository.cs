@@ -4,65 +4,71 @@ using System.Data;
 using Dapper;
 using Keepr.Models;
 
-namespace Keepr.Repositories {
-    public class KeepsRepository {
+namespace Keepr.Repositories
+{
+    public class KeepsRepository
+    {
         private readonly IDbConnection _db;
 
-        public KeepsRepository (IDbConnection db) {
+        public KeepsRepository(IDbConnection db)
+        {
             _db = db;
         }
 
-        internal IEnumerable<Keep> Get () {
+        internal IEnumerable<Keep> Get()
+        {
             string sql = "SELECT * FROM Keeps WHERE isPrivate = 0;";
-            return _db.Query<Keep> (sql);
+            return _db.Query<Keep>(sql);
         }
 
-        internal Keep Create (Keep newKeep) {
+        internal Keep Create(Keep newKeep)
+        {
             string sql = @"
             INSERT INTO keeps
             (userId, name, description, img, isPrivate, views, shares, keeps)
             VALUES
             (@UserId, @Name, @Description, @Img, @IsPrivate, @Views, @Shares, @Keeps);
             SELECT LAST_INSERT_ID()";
-            newKeep.Id = _db.ExecuteScalar<int> (sql, newKeep);
+            newKeep.Id = _db.ExecuteScalar<int>(sql, newKeep);
             return newKeep;
 
         }
 
-        internal object GetKeepsByUserId (string userId) {
+        internal object GetKeepsByUserId(string userId)
+        {
             string sql = "SELECT * FROM keeps WHERE userId = @userId";
-            return _db.Query<Keep> (sql, new { userId });
+            return _db.Query<Keep>(sql, new { userId });
         }
 
-        internal bool ViewKeep (Keep editKeep) {
-            throw new NotImplementedException ();
-        }
-
-        internal Keep GetById (int id) {
+        internal Keep GetById(int id)
+        {
             string sql = "SELECT * FROM keeps WHERE id = @id";
-            return _db.QueryFirstOrDefault<Keep> (sql, new { id });
+            return _db.QueryFirstOrDefault<Keep>(sql, new { id });
         }
 
-        public bool viewKeep (Keep keepToView) {
+        public bool viewKeep(Keep keepToView)
+        {
             string sql = @"
             UPDATE keeps
             SET
             views = @Views
             where id = @Id";
-            int affectedRows = _db.Execute (sql, keepToView);
+            int affectedRows = _db.Execute(sql, keepToView);
             return affectedRows == 1;
         }
 
-        internal bool keepKeep (Keep editKeep) {
+        internal bool keepKeep(Keep editKeep)
+        {
             string sql = @"
             UPDATE keeps
             SET
             keeps = @Keeps
             where id = @Id";
-            int affectedRows = _db.Execute (sql, editKeep);
+            int affectedRows = _db.Execute(sql, editKeep);
             return affectedRows == 1;
         }
-        internal bool Edit (Keep editKeep, string userId) {
+        internal bool Edit(Keep editKeep, string userId)
+        {
             string sql = @"
             UPDATE keeps
             SET
@@ -75,13 +81,14 @@ namespace Keepr.Repositories {
             keeps = @Keeps
             WHERE id = @Id
             AND userId = @UserId";
-            int affectedRows = _db.Execute (sql, editKeep);
+            int affectedRows = _db.Execute(sql, editKeep);
             return affectedRows == 1;
         }
 
-        internal bool Delete (int id, string userId) {
+        internal bool Delete(int id, string userId)
+        {
             string sql = "DELETE FROM keeps WHERE id = @id AND userId = @userId LIMIT 1";
-            int affectedRows = _db.Execute (sql, new { id, userId });
+            int affectedRows = _db.Execute(sql, new { id, userId });
             return affectedRows == 1;
         }
     }
