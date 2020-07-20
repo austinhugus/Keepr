@@ -6,6 +6,9 @@
         <div class="card-body">
           <h4 class="card-title">{{ keepData.name }}</h4>
           <p class="card-text">{{ keepData.description }}</p>
+          <button type="button" @submit.prevent="addFav">
+            <i class="far fa-star fa-2x float-right"></i>
+          </button>
         </div>
       </div>
     </div>
@@ -25,4 +28,8 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.fa-star {
+  color: rgb(213, 213, 92);
+}
+</style>

@@ -32,7 +32,6 @@ namespace keepr.Services
         }
 
 
-
         public Vault Create(Vault newVault)
         {
             return _repo.Create(newVault);

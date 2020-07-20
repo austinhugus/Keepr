@@ -21,7 +21,7 @@
 
 <script>
 import Keep from "@/components/keep";
-import keepForm from "@/components/createkeep";
+import keepForm from "@/components/keepForm";
 export default {
   name: "home",
   mounted() {
