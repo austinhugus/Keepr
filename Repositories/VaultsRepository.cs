@@ -50,5 +50,11 @@ namespace keepr.Repositories
             int affectedRows = _db.Execute(sql, new { id, userId });
             return affectedRows == 1;
         }
+
+        internal IEnumerable<Vault> Get()
+        {
+            string sql = @"SELECT * FROM vaults";
+            return _db.Query<Vault>(sql);
+        }
     }
 }

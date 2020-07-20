@@ -52,5 +52,9 @@ namespace keepr.Services
             throw new Exception("Not Successfully Deleted");
         }
 
+        internal IEnumerable<Vault> Get()
+        {
+            return _repo.Get();
+        }
     }
 }

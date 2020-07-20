@@ -54,9 +54,21 @@ namespace keepr.Controllers
             }
         }
 
-
-        [HttpGet]
+        [HttpGet] // GetAll
         public ActionResult<IEnumerable<Vault>> Get()
+        {
+            try
+            {
+                return Ok(_vs.Get());
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
+
+        [HttpGet("userId")]
+        public ActionResult<IEnumerable<Vault>> GetByUserId()
         {
             try
             {
