@@ -20,14 +20,14 @@ namespace keepr.Repositories
             string sql = "SELECT * FROM vaultkeeps WHERE id = @id AND userId = @userId";
             return _db.Query<VaultKeep>(sql, new { userId });
         }
-        internal VaultKeep GetById(int id)
+        internal DTOVaultKeep GetById(int id)
         {
             string sql = @"
             SELECT * FROM vaultkeeps WHERE id = @Id";
-            return _db.QueryFirstOrDefault<VaultKeep>(sql, new { id });
+            return _db.QueryFirstOrDefault<DTOVaultKeep>(sql, new { id });
         }
 
-        public IEnumerable<VaultKeep> GetKeepsByVaultId(int vaultId, string userId)
+        internal IEnumerable<VaultKeep> GetKeepsByVaultId(int vaultId, string userId)
         {
             string sql = @"SELECT 
             k.*,
@@ -38,14 +38,20 @@ namespace keepr.Repositories
             return _db.Query<VaultKeep>(sql, new { vaultId, userId });
         }
 
-        internal IEnumerable<VaultKeep> Get()
+
+        internal IEnumerable<VaultKeep> GetAll()
         {
-            string sql = @"
-            SELECT * FROM vaultkeeps";
+            string sql = "SELECT * FROM vaultkeeps";
             return _db.Query<VaultKeep>(sql);
         }
 
-        internal VaultKeep Create(VaultKeep newVaultKeep)
+        internal void Delete(int id)
+        {
+            string sql = "DELETE FROM vaultkeeps where id = @Id";
+            _db.Execute(sql, new { id });
+        }
+
+        internal int Create(DTOVaultKeep newDTOVaultKeep)
         {
             string sql = @"
             INSERT INTO vaultkeeps
@@ -53,18 +59,8 @@ namespace keepr.Repositories
             VALUES
             (@VaultId, @KeepId, @UserId);
             SELECT LAST_INSERT_ID();";
-            newVaultKeep.Id = _db.ExecuteScalar<int>(sql, newVaultKeep);
-            return newVaultKeep;
+            return _db.ExecuteScalar<int>(sql, newDTOVaultKeep);
         }
 
-        public bool Delete(int id, string userId)
-        {
-            string sql = @"
-            DELETE FROM vaultkeeps WHERE id = @Id AND userId = @UserId";
-            int affectedRows = _db.Execute(sql, new { id, userId });
-            return affectedRows == 1;
-
-
-        }
     }
 }

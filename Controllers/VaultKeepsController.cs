@@ -20,21 +20,9 @@ namespace keepr.Controllers
             _vks = vks;
         }
 
-        [HttpGet]
-        public ActionResult<IEnumerable<VaultKeep>> Get()
-        {
-            try
-            {
-                var userId = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
-                return Ok(_vks.Get());
-            }
-            catch (Exception e)
-            {
-                return BadRequest(e.Message);
-            }
-        }
+
         [HttpGet("{id}")]
-        public ActionResult<IEnumerable<VaultKeep>> Get(int id)
+        public ActionResult<IEnumerable<DTOVaultKeep>> Get(int id)
         {
             try
             {
@@ -49,13 +37,12 @@ namespace keepr.Controllers
 
         //POST
         [HttpPost]
-        public ActionResult<VaultKeep> Post([FromBody] VaultKeep newVaultKeep)
+        public ActionResult<DTOVaultKeep> Post([FromBody] DTOVaultKeep newDTOVaultKeep)
         {
             try
             {
                 var userId = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
-                newVaultKeep.UserId = userId;
-                return Ok(_vks.Create(newVaultKeep));
+                return Ok(_vks.Create(newDTOVaultKeep));
             }
             catch (Exception e)
             {
@@ -65,16 +52,15 @@ namespace keepr.Controllers
         }
 
         [HttpDelete("{id}")]
-        public ActionResult<string> Delete(int id)
+        public ActionResult<DTOVaultKeep> Delete(int id)
         {
             try
             {
                 var userId = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
-                return Ok(_vks.Delete(id, userId));
+                return Ok(_vks.Delete(id));
             }
             catch (Exception e)
             {
-
                 return BadRequest(e.Message);
             }
         }

@@ -19,13 +19,25 @@ export default new Vuex.Store({
   state: {
     keeps: [],
     privateKeeps: [],
+    myKeeps: [],
+    myFavKeeps: [],
+    activeKeep: [],
   },
   mutations: {
     setKeeps(state, keeps) {
       state.keeps = keeps;
     },
-    addKeep(state, keeps) {
+    setKeep(state, keeps) {
       state.keeps.push(keeps);
+    },
+    setMyKeeps(state, keeps) {
+      state.myKeeps = keeps;
+    },
+    setMyFavKeeps(state, keep) {
+      state.activeKeep = keep;
+    },
+    removeKeep(state, id) {
+      state.keeps = state.keeps.filter((k) => k.id != id);
     },
   },
   actions: {
@@ -54,6 +66,30 @@ export default new Vuex.Store({
         commit("addKeep", res.data);
       } catch (error) {
         console.error(error);
+      }
+    },
+    async deleteKeep({ dispatch }, id) {
+      try {
+        await _api.delete("keeps/" + id);
+        dispatch("getKeeps");
+      } catch (e) {
+        console.error(e);
+      }
+    },
+    async addFav({ dispatch }, fav) {
+      try {
+        let res = await _api.post("/keepFavorites", fav);
+        dispatch("getMyFavKeeps");
+      } catch (err) {
+        console.error(err);
+      }
+    },
+    async removeFav({ dispatch }, favId) {
+      try {
+        let res = await _api.delete("/keepFavorites/" + favId);
+        dispatch("getMyFavKeeps");
+      } catch (err) {
+        console.error(err);
       }
     },
   },

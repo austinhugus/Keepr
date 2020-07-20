@@ -8,6 +8,7 @@ USE keepr208;
 --     INDEX userId (userId),  
 --     PRIMARY KEY (id)
 -- );
+DROP TABLE IF EXISTS keeps;
 
 -- CREATE TABLE keeps (
 --     id int NOT NULL AUTO_INCREMENT,
@@ -55,5 +56,5 @@ USE keepr208;
 -- -- USE THIS TO CLEAN OUT YOUR DATABASE
 -- DROP TABLE IF EXISTS vaultkeeps;
 -- DROP TABLE IF EXISTS vaults;
--- DROP TABLE IF EXISTS keeps;
+DROP TABLE IF EXISTS keeps;
 -- DROP TABLE IF EXISTS users;

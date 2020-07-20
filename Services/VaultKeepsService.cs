@@ -14,38 +14,38 @@ namespace keepr.Services
             _repo = repo;
         }
 
-        public VaultKeep Get(int id)
+        public DTOVaultKeep Get(int id)
         {
-            return _repo.GetById(id);
+            DTOVaultKeep exists = _repo.GetById(id);
+            if (exists == null)
+            {
+                throw new Exception("Invalid VaultKeep Id");
+            }
+            return exists;
         }
 
-        public IEnumerable<VaultKeepViewModel> GetKeepsByVaultId(int vaultId, string userId)
+        public IEnumerable<VaultKeep> GetKeepsByVaultId(int vaultId, string userId)
         {
-            return (IEnumerable<VaultKeepViewModel>)_repo.GetKeepsByVaultId(vaultId, userId);
+            return _repo.GetKeepsByVaultId(vaultId, userId);
         }
 
-        public VaultKeep Create(VaultKeep newVaultKeep)
+        public DTOVaultKeep Create(DTOVaultKeep newVaultKeep)
         {
-            return _repo.Create(newVaultKeep);
+            int id = _repo.Create(newVaultKeep);
+            newVaultKeep.Id = id;
+            return newVaultKeep;
+        }
+
+        public DTOVaultKeep Delete(int id)
+        {
+            DTOVaultKeep exists = Get(id);
+            _repo.Delete(id);
+            return exists;
         }
 
         internal IEnumerable<VaultKeep> Get()
         {
-            return _repo.Get();
-        }
-
-        internal string Delete(int id, string userId)
-        {
-            VaultKeep foundVaultKeep = Get(id);
-            if (foundVaultKeep.UserId != userId)
-            {
-                throw new Exception("Can't delete this vaultKeep");
-            }
-            if (_repo.Delete(id, userId))
-            {
-                return "Successfully deleted";
-            }
-            throw new Exception("Not Successfully Deleted");
+            return _repo.GetAll();
         }
     }
 }
