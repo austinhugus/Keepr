@@ -17,7 +17,13 @@ namespace keepr.Repositories
 
         internal IEnumerable<VaultKeep> GetByUserId(string userId)
         {
-            string sql = "SELECT * FROM vaultkeeps WHERE id = @id AND userId = @userId";
+            string sql = @"
+            SELECT 
+            v.*,
+            vk.id as vaultkeepId
+            FROM vaultkeeps vk
+            INNER JOIN keeps k on k.id = vk.keepId
+            WHERE userId = @userId;";
             return _db.Query<VaultKeep>(sql, new { userId });
         }
 
@@ -33,6 +39,7 @@ namespace keepr.Repositories
             SELECT * FROM vaultkeeps WHERE id = @Id";
             return _db.QueryFirstOrDefault<DTOVaultKeep>(sql, new { id });
         }
+
 
 
         internal IEnumerable<VaultKeep> GetKeepsByVaultId(int vaultId, string userId)
@@ -63,6 +70,7 @@ namespace keepr.Repositories
             SELECT LAST_INSERT_ID();";
             return _db.ExecuteScalar<int>(sql, newDTOVaultKeep);
         }
+
 
     }
 }

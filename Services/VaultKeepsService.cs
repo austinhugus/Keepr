@@ -27,6 +27,11 @@ namespace keepr.Services
             return _repo.GetKeepsByVaultId(vaultId, userId);
         }
 
+        internal IEnumerable<VaultKeep> GetByUserId(string userId)
+        {
+            return _repo.GetByUserId(userId);
+        }
+
         public DTOVaultKeep Create(DTOVaultKeep newVaultKeep)
         {
             int id = _repo.Create(newVaultKeep);

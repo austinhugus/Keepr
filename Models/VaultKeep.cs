@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using Keepr.Models;
 
 namespace keepr.Models
@@ -7,6 +8,7 @@ namespace keepr.Models
     {
 
         public int Id { get; set; }
+        [Required]
         public string UserId { get; set; }
         public int VaultId { get; set; }
         public int KeepId { get; set; }

@@ -20,7 +20,19 @@ namespace keepr.Controllers
         {
             _vks = vks;
         }
-
+        [HttpGet]
+        public ActionResult<IEnumerable<VaultKeep>> Get()
+        {
+            try
+            {
+                string userId = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+                return Ok(_vks.GetByUserId(userId));
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
         //POST
         [HttpPost]
         public ActionResult<DTOVaultKeep> Post([FromBody] DTOVaultKeep newDTOVaultKeep)
