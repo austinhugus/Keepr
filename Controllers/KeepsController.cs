@@ -33,6 +33,19 @@ namespace Keepr.Controllers
                 return BadRequest(e.Message);
             };
         }
+        [HttpGet("{id}")]
+        public ActionResult<Keep> GetById(int id)
+        {
+            try
+            {
+
+                return Ok(_ks.GetById(id));
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
 
         [HttpGet("user")]
         [Authorize]
@@ -49,20 +62,6 @@ namespace Keepr.Controllers
             };
         }
 
-        [HttpGet("{id}")]
-
-        public ActionResult<Keep> GetById(int id)
-        {
-            try
-            {
-
-                return Ok(_ks.GetById(id));
-            }
-            catch (Exception e)
-            {
-                return BadRequest(e.Message);
-            }
-        }
 
         [HttpPost]
         [Authorize]

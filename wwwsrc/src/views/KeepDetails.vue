@@ -9,14 +9,17 @@
         </div>
         <p>Views:{{ keep.views }} | Keeps:{{ keep.keeps }}</p>
 
-        <button type="button" class="btn btn-success"">
-          Add To Vault
-        </button>
+        <!-- <div class="dropdown">
+          <button onclick="addVaultKeep()" class="dropbtn">Dropdown</button>
+          <div id="myDropdown" class="dropdown-content">
+            <s href="#vault">{{ userId.vault }}/>
+          </div>
+        </div> -->
         <button
           type="button"
           class="btn btn-danger"
           @click="deleteKeep()"
-          v-if="keep.userId == $auth.user.sub"
+          v-if="keep.userId == $auth.user"
         >
           Delete
         </button>
@@ -39,8 +42,13 @@ export default {
       return this.$store.state.activeKeep;
     },
   },
-  methods: {},
-  
+  methods: {
+    addVaultKeep() {
+      event.stopPropagation();
+      this.$store.dispatch("", { keepId: this.keepData.id });
+    },
+  },
+
   components: {},
 };
 </script>

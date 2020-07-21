@@ -1,19 +1,24 @@
 <template>
   <div class="keep rounded">
-    <div
-      class="border shadow m-2"
-      @click="
-        $router.push({ name: 'keepDetails', params: { keepId: keepData.id } })
-      "
-    >
+    <div class="border shadow m-2">
       <div class="card text-left">
         <div>
           <i
             class="far fa-times-circle float-right pointer"
-            @click.prevent="deleteKeep"
+            @click="deleteKeep(keepId)"
           ></i>
           <div>
-            <img class="card-img-top" :src="keepData.img" alt="" />
+            <img
+              class="card-img-top"
+              :src="keepData.img"
+              alt=""
+              @click="
+                $router.push({
+                  name: 'keepDetails',
+                  params: { keepId: keepData.id },
+                })
+              "
+            />
             <i
               class="far fa-star fa-2x float-right pointer"
               style="padding-bottom: 0%;"
@@ -39,7 +44,7 @@ export default {
   computed: {},
   methods: {
     deleteKeep() {
-      this.$store.dispatch("deleteKeep", this.$route.params.keepId);
+      this.$store.dispatch("deleteKeep", this.keepId);
     },
   },
   components: {},
