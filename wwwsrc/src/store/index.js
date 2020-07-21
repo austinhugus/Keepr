@@ -20,20 +20,20 @@ export default new Vuex.Store({
     keeps: [],
     privateKeeps: [],
     myKeeps: [],
-    myFavKeeps: [],
-    activeKeep: [],
+    myVaultKeeps: [],
+    activeKeep: {},
   },
   mutations: {
     setKeeps(state, keeps) {
       state.keeps = keeps;
     },
-    setKeep(state, keeps) {
-      state.keeps.push(keeps);
+    setKeep(state, keep) {
+      state.activeKeep = keep;
     },
     setMyKeeps(state, keeps) {
       state.myKeeps = keeps;
     },
-    setMyFavKeeps(state, keep) {
+    setActiveKeep(state, keep) {
       state.activeKeep = keep;
     },
     removeKeep(state, id) {
@@ -52,14 +52,22 @@ export default new Vuex.Store({
         let res = await _api.get("Keeps");
         commit("setKeeps", res.data);
       } catch (e) {
-        alert(JSON.stringify(e));
+        console.error(e);
       }
     },
     async getMyKeeps({ commit }) {
       let res = await _api.get("/keeps/user");
       commit("setMyKeeps", res.data);
     },
-
+    async getKeep({ commit }, keepId) {
+      try {
+        let res = await _api.get("keeps/" + keepId);
+        console.log("getKeep:", res.data);
+        commit("setKeep", res.data);
+      } catch (e) {
+        console.error(e);
+      }
+    },
     async createKeep({ commit, dispatch }, newKeep) {
       try {
         let res = await _api.post("keeps", newKeep);
@@ -68,29 +76,34 @@ export default new Vuex.Store({
         console.error(error);
       }
     },
-    async deleteKeep({ dispatch }, id) {
+    async deleteKeep({ dispatch, commit }, keepId) {
       try {
-        await _api.delete("keeps/" + id);
+        await _api.delete("keeps/" + keepId);
         dispatch("getKeeps");
+        commit("removeKeep", keepId);
+        commit("setActiveKeep");
       } catch (e) {
         console.error(e);
       }
     },
-    async addFav({ dispatch }, fav) {
+    async addVaultKeep({ dispatch }) {
       try {
-        let res = await _api.post("/keepFavorites", fav);
-        dispatch("getMyFavKeeps");
+        let res = await _api.post("/vaults" + "id" + "/keeps");
+        dispatch("getMyVaultKeeps");
       } catch (err) {
         console.error(err);
       }
     },
-    async removeFav({ dispatch }, favId) {
+    async removeVaultKeep({ dispatch }) {
       try {
-        let res = await _api.delete("/keepFavorites/" + favId);
-        dispatch("getMyFavKeeps");
+        let res = await _api.delete("/vaults" + "id" + "/keeps");
+        dispatch("getMyVaultKeeps");
       } catch (err) {
         console.error(err);
       }
+    },
+    setActiveKeep({ commit }, keep) {
+      commit("setActiveKeep", keep);
     },
   },
 });

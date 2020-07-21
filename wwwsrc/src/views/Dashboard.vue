@@ -1,6 +1,6 @@
 <template>
   <div class="dashboard">
-    <h1>WELCOME</h1>
+    <h1>WELCOME Austin</h1>
     public {{ publicKeeps }} user {{ userKeeps }}
   </div>
 </template>
