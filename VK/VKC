@@ -5,7 +5,6 @@ using keepr.Models;
 using keepr.Services;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
-using Keepr.Models;
 
 namespace keepr.Controllers
 {
@@ -21,33 +20,51 @@ namespace keepr.Controllers
             _vks = vks;
         }
 
-        //POST
-        [HttpPost]
-        public ActionResult<DTOVaultKeep> Post([FromBody] DTOVaultKeep newDTOVaultKeep)
+
+        [HttpGet("{id}")]
+        public ActionResult<IEnumerable<DTOVaultKeep>> Get(int id)
         {
             try
             {
-                string user = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
-                return Ok(_vks.Create(newDTOVaultKeep));
+                var userId = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+                return Ok(_vks.Get(id));
             }
             catch (Exception e)
             {
                 return BadRequest(e.Message);
             }
         }
-        //DELETEBYID
-        [HttpDelete("{id}")]
-        public ActionResult<DTOVaultKeep> Delete(int Id)
+
+        //POST
+        [HttpPost]
+        public ActionResult<DTOVaultKeep> Post([FromBody] DTOVaultKeep newDTOVaultKeep)
         {
             try
             {
-                string user = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
-                return Ok(_vks.Delete(user, Id));
+                var userId = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+                return Ok(_vks.Create(newDTOVaultKeep));
             }
-            catch (System.Exception err)
+            catch (Exception e)
             {
-                return BadRequest(err.Message);
+
+                return BadRequest(e.Message);
             }
         }
+
+        [HttpDelete("{id}")]
+        public ActionResult<DTOVaultKeep> Delete(int id)
+        {
+            try
+            {
+                var userId = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+                return Ok(_vks.Delete(id));
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
+
+
     }
 }

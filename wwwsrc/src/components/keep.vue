@@ -8,6 +8,7 @@
             @click.prevent="deleteKeep"
           ></i>
         </div>
+
         <img class="card-img-top" :src="keepData.img" alt="" />
         <div class="card-body">
           <h4 class="card-title">{{ keepData.name }}</h4>
@@ -53,5 +54,13 @@ export default {
 }
 .pointer {
   cursor: pointer;
+}
+.card-columns {
+  @include media-breakpoint-only(lg) {
+    column-count: 4;
+  }
+  @include media-breakpoint-only(xl) {
+    column-count: 5;
+  }
 }
 </style>

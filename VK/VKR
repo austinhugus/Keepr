@@ -20,20 +20,12 @@ namespace keepr.Repositories
             string sql = "SELECT * FROM vaultkeeps WHERE id = @id AND userId = @userId";
             return _db.Query<VaultKeep>(sql, new { userId });
         }
-
-        internal DTOVaultKeep Get(int id)
-        {
-            string sql = "SELECT * FROM vaultkeeps WHERE id = @Id";
-            return (DTOVaultKeep)_db.Query<DTOVaultKeep>(sql);
-        }
-
         internal DTOVaultKeep GetById(int id)
         {
             string sql = @"
             SELECT * FROM vaultkeeps WHERE id = @Id";
             return _db.QueryFirstOrDefault<DTOVaultKeep>(sql, new { id });
         }
-
 
         internal IEnumerable<VaultKeep> GetKeepsByVaultId(int vaultId, string userId)
         {
@@ -47,9 +39,15 @@ namespace keepr.Repositories
         }
 
 
+        internal IEnumerable<VaultKeep> GetAll()
+        {
+            string sql = "SELECT * FROM vaultkeeps";
+            return _db.Query<VaultKeep>(sql);
+        }
+
         internal void Delete(int id)
         {
-            string sql = "DELETE FROM vaultkeeps where id = @Id AND userId= @UserId";
+            string sql = "DELETE FROM vaultkeeps where id = @Id";
             _db.Execute(sql, new { id });
         }
 
@@ -57,9 +55,9 @@ namespace keepr.Repositories
         {
             string sql = @"
             INSERT INTO vaultkeeps
-            (userId, vaultId, keepId)
+            (vaultId, keepId, userId)
             VALUES
-            (@UserId, @VaultId, @KeepId);
+            (@VaultId, @KeepId, @UserId);
             SELECT LAST_INSERT_ID();";
             return _db.ExecuteScalar<int>(sql, newDTOVaultKeep);
         }
