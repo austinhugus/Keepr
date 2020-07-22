@@ -1,7 +1,7 @@
 <template>
   <div class="dashboard">
     <h1>WELCOME Austin</h1>
-    public {{ publicKeeps }} user {{ userKeeps }}
+    <!-- public {{ publicKeeps }} user {{ userKeeps }} -->
     <div class="row justify-content-center">
       <vaultForm />
     </div>

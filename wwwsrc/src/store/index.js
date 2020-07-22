@@ -41,7 +41,7 @@ export default new Vuex.Store({
     removeKeep(state, id) {
       state.keeps = state.keeps.filter((k) => k.id != id);
     },
-    setVault(state, vaults) {
+    setVaults(state, vaults) {
       state.activeVault = vaults;
     },
     removeVault(state, id) {

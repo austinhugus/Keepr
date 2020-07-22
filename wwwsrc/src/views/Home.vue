@@ -2,7 +2,7 @@
   <div class="home container-fluid">
     <div class="row">
       <div class="col text-center">
-        <h1>Welcome To HELL</h1>
+        <h1>Welcome To KeepR</h1>
       </div>
     </div>
     <div class="row justify-content-center">
