@@ -1,8 +1,8 @@
 <template>
   <div class="keep rounded">
-    <div class="border shadow m-2">
+    <div class="border shadow m-2 card-c">
       <div class="row">
-        <div class="card text-left">
+        <div class="card text-left card-columns">
           <div>
             <i
               class="far fa-times-circle float-right pointer"
@@ -71,5 +71,28 @@ export default {
 }
 .pointer {
   cursor: pointer;
+}
+@media (min-width: 576px) {
+  .card-columns {
+    column-count: 2;
+  }
+}
+
+@media (min-width: 768px) {
+  .card-columns {
+    column-count: 3;
+  }
+}
+
+@media (min-width: 992px) {
+  .card-columns {
+    column-count: 4;
+  }
+}
+
+@media (min-width: 1200px) {
+  .card-columns {
+    column-count: 5;
+  }
 }
 </style>

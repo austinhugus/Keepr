@@ -1,27 +1,26 @@
 USE keepr208;
 
--- CREATE TABLE vaults (
---     id int NOT NULL AUTO_INCREMENT,
---     name VARCHAR(255) NOT NULL,
---     description VARCHAR(255) NOT NULL,
---     userId VARCHAR(255),
---     INDEX userId (userId),  
---     PRIMARY KEY (id)
--- );
--- CREATE TABLE keeps (
-DROP TABLE IF EXISTS keeps(
+CREATE TABLE vaults (
     id int NOT NULL AUTO_INCREMENT,
     name VARCHAR(255) NOT NULL,
     description VARCHAR(255) NOT NULL,
     userId VARCHAR(255),
-    img VARCHAR(255),
-    isPrivate TINYINT,
-    views INT DEFAULT 0,
-    shares INT DEFAULT 0,
-    keeps INT DEFAULT 0,
-    INDEX userId (userId),
+    INDEX userId (userId),  
     PRIMARY KEY (id)
 );
+-- CREATE TABLE keeps (
+--     id int NOT NULL AUTO_INCREMENT,
+--     name VARCHAR(255) NOT NULL,
+--     description VARCHAR(255) NOT NULL,
+--     userId VARCHAR(255),
+--     img VARCHAR(255),
+--     isPrivate TINYINT,
+--     views INT DEFAULT 0,
+--     shares INT DEFAULT 0,
+--     keeps INT DEFAULT 0,
+--     INDEX userId (userId),
+--     PRIMARY KEY (id)
+-- );
 
 -- CREATE TABLE vaultkeeps (
 --     id int NOT NULL AUTO_INCREMENT,
@@ -52,7 +51,7 @@ DROP TABLE IF EXISTS keeps(
 
 
 
--- -- USE THIS TO CLEAN OUT YOUR DATABASE
+-- USE THIS TO CLEAN OUT YOUR DATABASE
 -- DROP TABLE IF EXISTS vaultkeeps;
 -- DROP TABLE IF EXISTS vaults;
 -- DROP TABLE IF EXISTS keeps;

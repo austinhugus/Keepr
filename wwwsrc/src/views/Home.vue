@@ -8,9 +8,9 @@
     <div class="row justify-content-center">
       <keepForm />
     </div>
-    <div class="row card-columns">
+    <div class="row ml-5">
       <keep
-        class="col-4"
+        class="col-3"
         v-for="keep in keeps"
         :key="keep.id"
         :keepData="keep"
@@ -48,7 +48,27 @@ export default {
 </script>
 
 <style>
-.card-columns {
-  column-count: 5;
+@media (min-width: 576px) {
+  .card-columns {
+    column-count: 2;
+  }
+}
+
+@media (min-width: 768px) {
+  .card-columns {
+    column-count: 3;
+  }
+}
+
+@media (min-width: 992px) {
+  .card-columns {
+    column-count: 4;
+  }
+}
+
+@media (min-width: 1200px) {
+  .card-columns {
+    column-count: 5;
+  }
 }
 </style>
