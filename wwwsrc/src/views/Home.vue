@@ -8,15 +8,13 @@
     <div class="row justify-content-center">
       <keepForm />
     </div>
-    <div class="row">
-      <div class="card-columns">
-        <keep
-          class="col-4"
-          v-for="keep in keeps"
-          :key="keep.id"
-          :keepData="keep"
-        />
-      </div>
+    <div class="row card-columns">
+      <keep
+        class="col-4"
+        v-for="keep in keeps"
+        :key="keep.id"
+        :keepData="keep"
+      />
     </div>
   </div>
 </template>
@@ -51,6 +49,6 @@ export default {
 
 <style>
 .card-columns {
-  column-count: 4;
+  column-count: 5;
 }
 </style>

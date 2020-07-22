@@ -18,10 +18,12 @@ let _api = Axios.create({
 export default new Vuex.Store({
   state: {
     keeps: [],
+    vaults: [],
     privateKeeps: [],
     myKeeps: [],
     myVaultKeeps: [],
     activeKeep: {},
+    activeVault: {},
   },
   mutations: {
     setKeeps(state, keeps) {
@@ -38,6 +40,12 @@ export default new Vuex.Store({
     },
     removeKeep(state, id) {
       state.keeps = state.keeps.filter((k) => k.id != id);
+    },
+    setVault(state, vaults) {
+      state.activeVault = vaults;
+    },
+    removeVault(state, id) {
+      state.vaults = state.vaults.filter((v) => v.id != id);
     },
   },
   actions: {
@@ -62,8 +70,17 @@ export default new Vuex.Store({
     async getKeep({ commit }, keepId) {
       try {
         let res = await _api.get("keeps/" + keepId);
-        console.log("getKeep:", res.data);
+        console.log("getKeep", res.data);
         commit("setKeep", res.data);
+      } catch (e) {
+        console.error(e);
+      }
+    },
+    async getVault({ commit }, vaultId) {
+      try {
+        let res = await _api.get("vaults/" + vaultId);
+        console.log("getVault", res.data);
+        commit("setVault", res.data);
       } catch (e) {
         console.error(e);
       }
@@ -76,11 +93,28 @@ export default new Vuex.Store({
         console.error(error);
       }
     },
-    async deleteKeep({ dispatch }, keep) {
+    async deleteKeep({ dispatch }, keepId) {
       try {
-        await _api.delete("keeps/" + keep.id);
-        dispatch("getKeeps");
+        await _api.delete("keeps/" + keepId);
         router.push({ name: "keeps" });
+      } catch (e) {
+        console.error(e);
+      }
+    },
+    async createVault({ commit, state }, newVault) {
+      try {
+        let res = await _api.post("vaults", newVault);
+        let vaults = [...state.vaults, res.data];
+        commit("setVaults", vaults);
+      } catch (e) {
+        console.error(e);
+      }
+    },
+    async deleteVault({ dispatch }, vault) {
+      try {
+        await _api.delete("vaults/" + vault.id);
+        dispatch("getVaults");
+        router.push({ name: "vaults" });
       } catch (e) {
         console.error(e);
       }
@@ -101,8 +135,11 @@ export default new Vuex.Store({
         console.error(err);
       }
     },
-    setActiveKeep({ commit }, keep) {
-      commit("setActiveKeep", keep);
-    },
+    // async increaseKeeps({dispatch, commit },keepId) {
+    //   try {
+    //     let res = await _api.put("keeps" + keepId)
+    //     dispatch("")
+    //   }
+    // }
   },
 });

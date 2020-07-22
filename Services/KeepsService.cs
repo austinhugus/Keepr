@@ -63,7 +63,7 @@ namespace Keepr.Services
             {
                 return editKeep;
             }
-            throw new Exception("Can't edit your own keep");
+            throw new Exception("Can't edit that keep");
 
         }
 

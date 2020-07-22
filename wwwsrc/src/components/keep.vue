@@ -1,12 +1,12 @@
 <template>
   <div class="keep rounded">
     <div class="border shadow m-2">
-      <div class="row card-columns">
+      <div class="row">
         <div class="card text-left">
           <div>
             <i
               class="far fa-times-circle float-right pointer"
-              @click="deleteKeep"
+              @click="deleteKeep()"
             ></i>
             <div>
               <img
@@ -43,10 +43,14 @@ export default {
   mounted() {
     this.$store.dispatch("getKeeps", this.$route.params.keepId);
   },
-  computed: {},
+  computed: {
+    keep() {
+      return this.$store.state.keeps;
+    },
+  },
   methods: {
     deleteKeep() {
-      this.$store.dispatch("deleteKeep", this.$route.params.id);
+      this.$store.dispatch("deleteKeep", this.keep.id);
     },
   },
   components: {},
