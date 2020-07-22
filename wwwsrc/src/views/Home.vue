@@ -9,12 +9,14 @@
       <keepForm />
     </div>
     <div class="row">
-      <keep
-        class="col-4"
-        v-for="keep in keeps"
-        :key="keep.id"
-        :keepData="keep"
-      />
+      <div class="card-columns">
+        <keep
+          class="col-4"
+          v-for="keep in keeps"
+          :key="keep.id"
+          :keepData="keep"
+        />
+      </div>
     </div>
   </div>
 </template>
@@ -46,3 +48,9 @@ export default {
   },
 };
 </script>
+
+<style>
+.card-columns {
+  column-count: 4;
+}
+</style>

@@ -52,7 +52,7 @@ namespace Keepr.Repositories
             UPDATE keeps
             SET
             views = @Views
-            where id = @Id";
+            WHERE id = @Id";
             int affectedRows = _db.Execute(sql, keepToView);
             return affectedRows == 1;
         }
@@ -63,7 +63,7 @@ namespace Keepr.Repositories
             UPDATE keeps
             SET
             keeps = @Keeps
-            where id = @Id";
+            WHERE id = @Id";
             int affectedRows = _db.Execute(sql, editKeep);
             return affectedRows == 1;
         }

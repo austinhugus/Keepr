@@ -14,7 +14,7 @@ namespace keepr.Services
             _repo = repo;
         }
 
-        public DTOVaultKeep Get(int id, string userId)
+        public DTOVaultKeep GetById(int id)
         {
             DTOVaultKeep exists = _repo.GetById(id);
             if (exists == null) { throw new Exception("Invalid vaultKeepid"); }
@@ -22,32 +22,26 @@ namespace keepr.Services
 
         }
 
-        public IEnumerable<VaultKeep> GetKeepsByVaultId(int vaultId, string userId)
+        public IEnumerable<VaultKeepViewModel> GetKeepsByVaultId(int vaultId, string userId)
         {
             return _repo.GetKeepsByVaultId(vaultId, userId);
         }
 
-        internal IEnumerable<VaultKeep> GetByUserId(string userId)
+        internal IEnumerable<VaultKeepViewModel> Get(string userId)
         {
             return _repo.GetByUserId(userId);
         }
 
-        public DTOVaultKeep Create(DTOVaultKeep newVaultKeep)
-        {
-            int id = _repo.Create(newVaultKeep);
-            newVaultKeep.Id = id;
-            return newVaultKeep;
-        }
 
-        internal VaultKeep Get(int id)
+        public DTOVaultKeep Create(DTOVaultKeep newDTOVaultKeep)
         {
-            throw new NotImplementedException();
+            return _repo.Create(newDTOVaultKeep);
         }
 
         public DTOVaultKeep Delete(string userId, int id)
         {
-            DTOVaultKeep exists = Get(id, userId);
-            _repo.Delete(id);
+            DTOVaultKeep exists = GetById(id);
+            _repo.Delete(id, userId);
             return exists;
         }
     }

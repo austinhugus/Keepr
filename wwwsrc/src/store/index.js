@@ -76,12 +76,11 @@ export default new Vuex.Store({
         console.error(error);
       }
     },
-    async deleteKeep({ dispatch, commit }, keepId) {
+    async deleteKeep({ dispatch }, keep) {
       try {
-        await _api.delete("keeps/" + keepId);
+        await _api.delete("keeps/" + keep.id);
         dispatch("getKeeps");
-        commit("removeKeep", keepId);
-        commit("setActiveKeep");
+        router.push({ name: "keeps" });
       } catch (e) {
         console.error(e);
       }

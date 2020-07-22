@@ -15,16 +15,16 @@ namespace keepr.Repositories
             _db = db;
         }
 
-        internal IEnumerable<VaultKeep> GetByUserId(string userId)
+        internal IEnumerable<VaultKeepViewModel> GetByUserId(string userId)
         {
             string sql = @"
             SELECT 
-            v.*,
+            k.*,
             vk.id as vaultkeepId
             FROM vaultkeeps vk
             INNER JOIN keeps k on k.id = vk.keepId
             WHERE userId = @userId;";
-            return _db.Query<VaultKeep>(sql, new { userId });
+            return _db.Query<VaultKeepViewModel>(sql, new { userId });
         }
 
         internal DTOVaultKeep Get(int id)
@@ -35,14 +35,13 @@ namespace keepr.Repositories
 
         internal DTOVaultKeep GetById(int id)
         {
-            string sql = @"
-            SELECT * FROM vaultkeeps WHERE id = @Id";
+            string sql = "SELECT * FROM vaultkeeps WHERE id = @id";
             return _db.QueryFirstOrDefault<DTOVaultKeep>(sql, new { id });
         }
 
 
 
-        internal IEnumerable<VaultKeep> GetKeepsByVaultId(int vaultId, string userId)
+        internal IEnumerable<VaultKeepViewModel> GetKeepsByVaultId(int vaultId, string userId)
         {
             string sql = @"SELECT 
             k.*,
@@ -50,17 +49,17 @@ namespace keepr.Repositories
             FROM vaultkeeps vk
             INNER JOIN keeps k ON k.id = vk.keepId 
             WHERE (vaultId = @vaultId AND vk.userId = @userId)";
-            return _db.Query<VaultKeep>(sql, new { vaultId, userId });
+            return _db.Query<VaultKeepViewModel>(sql, new { vaultId, userId });
         }
 
 
-        internal void Delete(int id)
+        internal void Delete(int id, string userId)
         {
-            string sql = "DELETE FROM vaultkeeps where id = @Id AND userId= @UserId";
+            string sql = "DELETE FROM vaultkeeps where id = @id AND userId= @userId";
             _db.Execute(sql, new { id });
         }
 
-        internal int Create(DTOVaultKeep newDTOVaultKeep)
+        internal DTOVaultKeep Create(DTOVaultKeep newVaultKeep)
         {
             string sql = @"
             INSERT INTO vaultkeeps
@@ -68,7 +67,8 @@ namespace keepr.Repositories
             VALUES
             (@UserId, @VaultId, @KeepId);
             SELECT LAST_INSERT_ID();";
-            return _db.ExecuteScalar<int>(sql, newDTOVaultKeep);
+            newVaultKeep.Id = _db.ExecuteScalar<int>(sql, newVaultKeep);
+            return newVaultKeep;
         }
 
 

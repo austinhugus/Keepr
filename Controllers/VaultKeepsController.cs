@@ -21,12 +21,12 @@ namespace keepr.Controllers
             _vks = vks;
         }
         [HttpGet]
-        public ActionResult<IEnumerable<VaultKeep>> Get()
+        public ActionResult<IEnumerable<VaultKeepViewModel>> Get()
         {
             try
             {
                 string userId = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
-                return Ok(_vks.GetByUserId(userId));
+                return Ok(_vks.Get(userId));
             }
             catch (Exception e)
             {
@@ -39,7 +39,7 @@ namespace keepr.Controllers
         {
             try
             {
-                string user = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+                newDTOVaultKeep.UserId = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
                 return Ok(_vks.Create(newDTOVaultKeep));
             }
             catch (Exception e)
