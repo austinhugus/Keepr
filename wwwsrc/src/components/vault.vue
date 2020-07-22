@@ -1,30 +1,28 @@
 <template>
-  <div class="keep rounded">
+  <div class="vault rounded">
     <div class="border shadow m-2">
       <div class="row">
         <div class="card text-left">
           <div>
             <i
               class="far fa-times-circle float-right pointer"
-              @click="deleteKeep()"
+              @click="deleteVault()"
             ></i>
             <div>
               <img
                 class="card-img-top"
-                :src="keepData.img"
+                :src="vaultData.img"
                 alt=""
                 @click="
-                  increaseKeepViews,
-                    $router.push({
-                      name: 'keepDetails',
-                      params: { keepId: keepData.id },
-                    })
+                  $router.push({
+                    name: 'vaultDetails',
+                    params: { vaultId: vaultData.id },
+                  })
                 "
               />
               <i
                 class="far fa-star fa-2x float-right pointer"
                 style="padding-bottom: 0%;"
-                @submit.prevent="addFav"
               ></i>
             </div>
           </div>
@@ -36,26 +34,26 @@
 
 <script>
 export default {
-  name: "keep",
-  props: ["keepData"],
+  name: "vault",
+  props: ["vaultData"],
   data() {
     return {};
   },
   mounted() {
-    this.$store.dispatch("getKeeps", this.$route.params.keepId);
+    this.$store.dispatch("getVaults", this.$route.params.vaultId);
   },
   computed: {
-    keep() {
-      return this.$store.state.keeps;
+    vault() {
+      return this.$store.state.vaults;
     },
   },
   methods: {
-    deleteKeep() {
-      this.$store.dispatch("deleteKeep", this.keep.id);
+    deleteVault() {
+      this.$store.dispatch("deleteVault", this.vault.id);
     },
-    increaseKeepViews() {
-      editKeep.views = editKeep.view++;
-      this.$store.dispatch("increaseKeeps", editKeep);
+    increaseVaultViews() {
+      editVault.views = editVault.view++;
+      this.$store.dispatch("increaseVaults", editVault);
     },
   },
   components: {},
@@ -66,9 +64,11 @@ export default {
 .fa-star {
   color: rgb(213, 213, 92);
 }
+
 .fa-times-circle {
   color: red;
 }
+
 .pointer {
   cursor: pointer;
 }

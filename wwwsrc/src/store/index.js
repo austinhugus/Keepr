@@ -135,11 +135,21 @@ export default new Vuex.Store({
         console.error(err);
       }
     },
-    // async increaseKeeps({dispatch, commit },keepId) {
-    //   try {
-    //     let res = await _api.put("keeps" + keepId)
-    //     dispatch("")
-    //   }
-    // }
+    async increaseKeeps({ dispatch, commit }, editKeep) {
+      try {
+        let res = await _api.put("keeps" + editKeep.id, editKeep);
+        commit("setKeep", res.data);
+      } catch (e) {
+        console.error(e);
+      }
+    },
+    async increaseViews({ dispatch, commit }, editKeep) {
+      try {
+        let res = await _api.put("keeps" + editKeep.id, editKeep);
+        commit("setKeep", res.data);
+      } catch (e) {
+        console.error(e);
+      }
+    },
   },
 });
