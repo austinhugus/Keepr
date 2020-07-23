@@ -4,12 +4,14 @@
       <vaultForm />
     </div>
     <h1 class="border-bottom text-white text-center">My Keeps</h1>
-    <keep
-      class="col-4 ml-5"
-      v-for="keep in keeps"
-      :key="keep.id"
-      :keepData="keep"
-    />
+    <div class="row">
+      <keep
+        class="col-4 ml-5"
+        v-for="keep in keeps"
+        :key="keep.id"
+        :keepData="keep"
+      />
+    </div>
     <h1 class="border-bottom text-white text-center">My Vaults</h1>
     <div class="row">
       <vault
@@ -39,9 +41,6 @@ export default {
       return this.$store.state.user;
     },
     keep() {
-      return this.$store.state.myKeeps;
-    },
-    keeps() {
       return this.$store.state.myKeeps;
     },
   },

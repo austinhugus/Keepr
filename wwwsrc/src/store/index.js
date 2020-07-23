@@ -54,7 +54,7 @@ export default new Vuex.Store({
       state.activeKeep = vault;
     },
     setVaultKeeps(state, vaults) {
-      state.vaults = vaults;
+      state.myVaultKeeps = vaults;
     },
   },
   actions: {

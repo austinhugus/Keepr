@@ -31,9 +31,7 @@ import Keep from "@/components/keep.vue";
 export default {
   name: "vaultDetails",
   data() {
-    return {
-      vaultId,
-    };
+    return {};
   },
   mounted() {
     this.$store.dispatch("getKeepsByVaultId", vaultId);
