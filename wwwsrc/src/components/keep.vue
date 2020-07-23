@@ -17,8 +17,7 @@
                   $router.push({
                     name: 'keepDetails',
                     params: { keepId: keepData.id },
-                  });
-                  increaseKeepViews();
+                  })
                 "
               />
               <i
@@ -53,10 +52,10 @@ export default {
     deleteKeep(keepId) {
       this.$store.dispatch("deleteKeep", keepId);
     },
-    increaseKeepViews() {
-      editKeep.views = editKeep.view + 1;
-      this.$store.dispatch("increaseKeepViews", keepId);
-    },
+    // increaseKeepViews() {
+    //   editKeep.views = editKeep.view + 1;
+    //   this.$store.dispatch("increaseKeepViews", keepId);
+    // },
   },
   components: {},
 };

@@ -8,13 +8,6 @@
           <img class="card-img-right col " :src="keep.img" alt="" />
         </div>
         <h3>Views:{{ keep.views }} | Keeps:{{ keep.keeps }}</h3>
-
-        <!-- <div class="dropdown">
-          <button onclick="addVaultKeep()" class="dropbtn">Dropdown</button>
-          <div id="myDropdown" class="dropdown-content">
-            <s href="#vault">{{ userId.vault }}/>
-          </div>
-        </div> -->
         <div>
           <div class="dropdown">
             <button

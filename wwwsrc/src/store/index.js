@@ -70,7 +70,7 @@ export default new Vuex.Store({
       }
     },
     async getMyKeeps({ commit }) {
-      let res = await _api.get("/keeps/user");
+      let res = await _api.get("keeps/user");
       commit("setMyKeeps", res.data);
     },
     async getKeep({ commit }, keepId) {
@@ -125,9 +125,9 @@ export default new Vuex.Store({
         console.error(e);
       }
     },
-    async addVaultKeep({ dispatch }, newVaultKeep) {
+    async addKeepToVault({ dispatch }, newVaultKeep) {
       try {
-        let res = await _api.post("/vaultkeeps", newVaultKeep);
+        let res = await _api.post("/vaultkeeps", newVaultKeep, newVaultKeep);
         dispatch("getMyVaultKeeps");
       } catch (err) {
         console.error(err);
@@ -135,7 +135,7 @@ export default new Vuex.Store({
     },
     async removeVaultKeep({ dispatch }, id) {
       try {
-        let res = await _api.delete("/vaults" + id + "/keeps");
+        let res = await _api.delete("/vaultkeeps");
         dispatch("getMyVaultKeeps");
       } catch (err) {
         console.error(err);

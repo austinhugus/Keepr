@@ -19,6 +19,7 @@ import Vault from "@/components/vault.vue";
 export default {
   mounted() {
     this.$store.dispatch("getVaults");
+    this.$store.dispatch("getMyKeeps");
   },
   computed: {
     vaults() {
