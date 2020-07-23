@@ -1,7 +1,6 @@
 <template>
   <div class="dashboard">
-    <h1 class="text-center border-bottom">WELCOME TO YOUR DASHBOARD</h1>
-    {{ userKeeps }}
+    <h1 class="text-center border-bottom">WELCOME {{ user }}</h1>
     <div class="row justify-content-center">
       <vaultForm />
     </div>
@@ -24,6 +23,9 @@ export default {
   computed: {
     vaults() {
       return this.$store.state.vaults;
+    },
+    user() {
+      return this.$store.state.user;
     },
   },
   components: {

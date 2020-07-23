@@ -16,37 +16,35 @@
           </div>
         </div> -->
         <div>
+          <div class="dropdown">
+            <button
+              class="btn btn-secondary dropdown-toggle"
+              type="button"
+              id="dropdownMenuButton"
+              data-toggle="dropdown"
+              aria-haspopup="true"
+              aria-expanded="false"
+            >
+              Add To Vault
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              <a
+                class="dropdown-item"
+                href="#"
+                v-for="vault in vaults"
+                :key="vault.id"
+                :vaultData="vault"
+                >{{ vault.name }}</a
+              >
+            </div>
+          </div>
           <button
             type="button"
-            class="btn btn-danger"
+            class="btn btn-danger m-2"
             @click="deleteKeep()"
-            v-if="keep.userId == $auth.user"
           >
             Delete
           </button>
-          <div>
-            <div class="dropdown">
-              <button
-                class="btn btn-secondary dropdown-toggle"
-                type="button"
-                id="dropdownMenu2"
-                data-toggle="dropdown"
-                aria-haspopup="true"
-                aria-expanded="false"
-              >
-                Add To Vaults
-              </button>
-              <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                <button class="dropdown-item" type="button">Action</button>
-                <button class="dropdown-item" type="button">
-                  Another action
-                </button>
-                <button class="dropdown-item" type="button">
-                  Something else here
-                </button>
-              </div>
-            </div>
-          </div>
         </div>
       </div>
     </div>
@@ -54,6 +52,7 @@
 </template>
 
 <script>
+import Vault from "@/components/vault.vue";
 export default {
   name: "keepDetails",
   data() {
@@ -66,6 +65,12 @@ export default {
     keep() {
       return this.$store.state.activeKeep;
     },
+    vault() {
+      return this.$store.state.vaults;
+    },
+    vaults() {
+      return this.$store.state.vaults;
+    },
   },
   methods: {
     addVaultKeep() {
@@ -74,7 +79,9 @@ export default {
     },
   },
 
-  components: {},
+  components: {
+    Vault,
+  },
 };
 </script>
 

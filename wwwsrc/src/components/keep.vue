@@ -14,11 +14,11 @@
                 :src="keepData.img"
                 alt=""
                 @click="
-                  increaseKeepViews,
-                    $router.push({
-                      name: 'keepDetails',
-                      params: { keepId: keepData.id },
-                    })
+                  $router.push({
+                    name: 'keepDetails',
+                    params: { keepId: keepData.id },
+                  });
+                  increaseKeepViews();
                 "
               />
               <i
@@ -55,7 +55,7 @@ export default {
     },
     increaseKeepViews() {
       editKeep.views = editKeep.view + 1;
-      this.$store.dispatch("increaseKeeps", keepId);
+      this.$store.dispatch("increaseKeepViews", keepId);
     },
   },
   components: {},
