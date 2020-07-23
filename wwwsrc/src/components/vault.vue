@@ -2,23 +2,25 @@
   <div class="vault rounded">
     <div class="border shadow m-2">
       <div class="row">
-        <div class="card" style="width: 18rem;">
-          <img
-            class="card-img-top"
-            :src="vaultData.img"
-            alt=""
-            @click="
-              $router.push({
-                name: 'vaultDetails',
-                params: { vaultId: vaultData.id },
-              })
-            "
-          />
-          <div class="card-body">
-            <h5 class="card-title">{{ vaults.name }}</h5>
-            <p class="card-text">
-              {{ vaults.description }}
-            </p>
+        <div class="card text-left">
+          <div>
+            <i
+              class="far fa-times-circle float-right pointer"
+              @click="deleteVault(vaultData.id)"
+            ></i>
+            <div>
+              <button
+                @click="
+                  $router.push({
+                    name: 'vaultDetails',
+                    params: { vaultId: vaultData.id },
+                  })
+                "
+              >
+                Enter Vault
+              </button>
+              <img class="card-img-top" :src="vaultData.img" alt="" />
+            </div>
           </div>
         </div>
       </div>

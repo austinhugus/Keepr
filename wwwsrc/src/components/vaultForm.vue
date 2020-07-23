@@ -1,7 +1,6 @@
 <template>
     <div class="vaultForm">
-        <form class="d-flex justify-content-right" 
-        @submit.prevent="createVault">
+        <form @submit.prevent="createVault">
             <div class="form-group">
                 <input type="text" name="name" placeholder="Name..." v-model="newVault.name" required />
             </div class="form-group">
@@ -10,7 +9,7 @@
                     required />
             </div class="form-group">
             <div class="form-group">
-                <input type="text" name="Img" placeholder="Img...(optional)" v-model="newVault.Img" />
+                <input type="text" name="Img" placeholder="Img..." v-model="newVault.Img" required />
             </div class="form-group">
             <button type="submit" class="btn btn-primary">Create Vault</button>
         </form>

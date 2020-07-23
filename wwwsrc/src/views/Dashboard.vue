@@ -1,15 +1,16 @@
 <template>
-  <div class="dashboard">
-    <h1 class="text-center border-bottom">WELCOME {{ user }}</h1>
+  <div class="home container-fluid">
     <div class="row justify-content-center">
       <vaultForm />
     </div>
-    <vault
-      class="col-3"
-      v-for="vault in vaults"
-      :key="vault.id"
-      :vaultData="vault"
-    />
+    <div class="row ml-5">
+      <vault
+        class="col-3"
+        v-for="vault in vaults"
+        :key="vault.id"
+        :vaultData="vault"
+      />
+    </div>
   </div>
 </template>
 
@@ -35,5 +36,4 @@ export default {
   },
 };
 </script>
-s
 <style></style>
