@@ -1,5 +1,5 @@
 <template>
-  <div class="vault rounded">
+  <div class="Vault rounded">
     <div class="border shadow m-2">
       <div class="row">
         <div class="card text-left">
@@ -30,7 +30,7 @@
 
 <script>
 export default {
-  name: "vault",
+  name: "Vault",
   props: ["vaultData"],
   data() {
     return {};

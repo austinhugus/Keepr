@@ -38,8 +38,11 @@ export default {
     user() {
       return this.$store.state.user;
     },
+    keep() {
+      return this.$store.state.myKeeps;
+    },
     keeps() {
-      return this.$store.statea.myKeeps;
+      return this.$store.state.myKeeps;
     },
   },
   components: {

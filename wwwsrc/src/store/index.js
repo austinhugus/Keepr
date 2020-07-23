@@ -53,8 +53,8 @@ export default new Vuex.Store({
     setActiveVault(state, vault) {
       state.activeKeep = vault;
     },
-    setVaultKeeps(state, vault) {
-      state.vaults = vault;
+    setVaultKeeps(state, vaults) {
+      state.vaults = vaults;
     },
   },
   actions: {
@@ -162,9 +162,10 @@ export default new Vuex.Store({
         console.error(e);
       }
     },
-    async getKeepsByVaultId({ commit, dispatch }, vaultId) {
+    async getKeepsByVaultId({ commit }, vaultId) {
       try {
         let res = await _api.get("vaults/" + vaultId + "/keeps");
+        console.log("setVaultKeeps", res.data);
         commit("setVaultKeeps", res.data);
       } catch (e) {
         console.error(e);

@@ -52,10 +52,10 @@ What this site is already pretty if you follow the mocks :wink: Make sure the fe
 
 <!-- - Visitors can see all public keeps (login not required) X -->
 <!-- - Keeps are displayed in a card like format with all data rendered X -->
+<!-- - Users have a dashboard route to see all their keeps and vaults -->
 
-- Users have a dashboard route to see all their keeps and vaults
 - Users can only see vaults they created
-- Users can View all the keeps in a given vault
+- Users can View all the keeps in a given vault X
 - Anytime a `keep` is `kept in a vault` the relevant count should go up
 
 #### Functionality:
@@ -65,11 +65,10 @@ What this site is already pretty if you follow the mocks :wink: Make sure the fe
 <!-- - Register, login and be automatically logged on page refresh X -->
 <!-- - Create and Delete Keeps X -->
 <!-- - Create and Delete Vaults X -->
-
 <!-- - Only Delete **things they created** -->
 <!-- - Add Keeps to Vaults -->
 
-- Remove Keeps from Vaults
+- Remove Keeps from Vaults X
 
 ### Finished?
 

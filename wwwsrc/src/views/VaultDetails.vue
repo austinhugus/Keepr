@@ -6,7 +6,7 @@
         <h3 class="text-center">{{ vault.description }}</h3>
         <div>
           <img class="card-img-right col " :src="vault.img" alt="" />
-          <div
+          <vault
             class="col-3"
             v-for="vault in vaults"
             :key="vault.id"
@@ -31,19 +31,24 @@ import Keep from "@/components/keep.vue";
 export default {
   name: "vaultDetails",
   data() {
-    return {};
+    return {
+      vaultId,
+    };
   },
   mounted() {
-    this.$store.dispatch("getKeepsByVaultId");
+    this.$store.dispatch("getKeepsByVaultId", vaultId);
   },
   computed: {
     vault() {
       return this.$store.state.myVaultKeeps;
     },
+    vaults() {
+      return this.$store.state.myVaultKeeps;
+    },
   },
   methods: {
-    getKeepsByVaultId(vaultId) {
-      this.$store.dispatch("getKeepsByVaultId", vaultId);
+    getKeepsByVaultId() {
+      this.$store.dispatch("getKeepsByVaultId", { vaultId: this.vaultData.id });
     },
   },
 
