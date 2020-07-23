@@ -22,12 +22,10 @@ namespace Keepr.Services
         {
             return _repo.Create(newKeep);
         }
-
         internal object GetByUserId(string userId)
         {
             return _repo.GetKeepsByUserId(userId);
         }
-
         internal Keep GetById(int id)
         {
             Keep foundKeep = _repo.GetById(id);

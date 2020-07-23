@@ -6,7 +6,7 @@
           <div>
             <i
               class="far fa-times-circle float-right pointer"
-              @click="deleteVault()"
+              @click="deleteVault(vaultData.id)"
             ></i>
             <div>
               <img
@@ -48,8 +48,8 @@ export default {
     },
   },
   methods: {
-    deleteVault() {
-      this.$store.dispatch("deleteVault", this.vault.id);
+    deleteVault(vaultId) {
+      this.$store.dispatch("deleteVault", vaultId);
     },
     increaseVaultViews() {
       editVault.views = editVault.view++;

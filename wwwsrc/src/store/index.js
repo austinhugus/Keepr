@@ -41,8 +41,11 @@ export default new Vuex.Store({
     removeKeep(state, id) {
       state.keeps = state.keeps.filter((k) => k.id != id);
     },
+    setVault(state, vault) {
+      state.activeVault = vault;
+    },
     setVaults(state, vaults) {
-      state.activeVault = vaults;
+      state.vaults = vaults;
     },
     removeVault(state, id) {
       state.vaults = state.vaults.filter((v) => v.id != id);
@@ -111,10 +114,9 @@ export default new Vuex.Store({
         console.error(e);
       }
     },
-    async deleteVault({ dispatch }, vault) {
+    async deleteVault({ dispatch }, id) {
       try {
-        await _api.delete("vaults/" + vault.id);
-        dispatch("getVaults");
+        await _api.delete("vaults/" + id);
         router.push({ name: "vaults" });
       } catch (e) {
         console.error(e);

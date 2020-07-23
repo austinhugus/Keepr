@@ -1,6 +1,6 @@
 <template>
   <div class="keep rounded">
-    <div class="border shadow m-2 card-c">
+    <div class="border shadow m-2">
       <div class="row">
         <div class="card text-left card-columns">
           <div>
@@ -54,8 +54,8 @@ export default {
       this.$store.dispatch("deleteKeep", keepId);
     },
     increaseKeepViews() {
-      editKeep.views = editKeep.view++;
-      this.$store.dispatch("increaseKeeps", editKeep);
+      editKeep.views = editKeep.view + 1;
+      this.$store.dispatch("increaseKeeps", keepId);
     },
   },
   components: {},
