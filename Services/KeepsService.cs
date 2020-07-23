@@ -35,10 +35,11 @@ namespace Keepr.Services
             {
                 throw new Exception("Invalid Id");
             }
-            if (foundKeep.IsPrivate == true)
+            if (foundKeep.IsPrivate == true && foundKeep.UserId == foundKeep.UserId)
             {
-
+                throw new Exception("Can't get this man!");
             }
+            return foundKeep;
         }
 
         internal Keep Edit(Keep editKeep, string userId)
