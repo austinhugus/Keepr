@@ -6,7 +6,7 @@
           <div>
             <i
               class="far fa-times-circle float-right pointer"
-              @click="deleteKeep()"
+              @click="deleteKeep(keepData.id)"
             ></i>
             <div>
               <img
@@ -50,8 +50,8 @@ export default {
     },
   },
   methods: {
-    deleteKeep() {
-      this.$store.dispatch("deleteKeep", this.keep.id);
+    deleteKeep(keepId) {
+      this.$store.dispatch("deleteKeep", keepId);
     },
     increaseKeepViews() {
       editKeep.views = editKeep.view++;
