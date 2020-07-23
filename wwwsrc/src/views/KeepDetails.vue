@@ -30,10 +30,11 @@
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
               <a
                 class="dropdown-item"
-                href="#"
                 v-for="vault in vaults"
                 :key="vault.id"
                 :vaultData="vault"
+                href="#"
+                @click="addVaultKeep(vaultId)"
                 >{{ vault.name }}</a
               >
             </div>
@@ -41,7 +42,7 @@
           <button
             type="button"
             class="btn btn-danger m-2"
-            @click="deleteKeep()"
+            @click="deleteKeep(keepData.id)"
           >
             Delete
           </button>
@@ -53,6 +54,7 @@
 
 <script>
 import Vault from "@/components/vault.vue";
+import Keep from "@/components/keep.vue";
 export default {
   name: "keepDetails",
   data() {
@@ -74,13 +76,16 @@ export default {
   },
   methods: {
     addVaultKeep() {
-      event.stopPropagation();
       this.$store.dispatch("", { keepId: this.keepData.id });
+    },
+    deleteKeep(keepId) {
+      this.$store.dispatch("deleteKeep", keepId);
     },
   },
 
   components: {
     Vault,
+    Keep,
   },
 };
 </script>
