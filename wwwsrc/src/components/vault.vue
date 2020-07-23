@@ -2,29 +2,23 @@
   <div class="vault rounded">
     <div class="border shadow m-2">
       <div class="row">
-        <div class="card text-left">
-          <div>
-            <i
-              class="far fa-times-circle float-right pointer"
-              @click="deleteVault(vaultData.id)"
-            ></i>
-            <div>
-              <img
-                class="card-img-top"
-                :src="vaultData.img"
-                alt=""
-                @click="
-                  $router.push({
-                    name: 'vaultDetails',
-                    params: { vaultId: vaultData.id },
-                  })
-                "
-              />
-              <i
-                class="far fa-star fa-2x float-right pointer"
-                style="padding-bottom: 0%;"
-              ></i>
-            </div>
+        <div class="card" style="width: 18rem;">
+          <img
+            class="card-img-top"
+            :src="vaultData.img"
+            alt=""
+            @click="
+              $router.push({
+                name: 'vaultDetails',
+                params: { vaultId: vaultData.id },
+              })
+            "
+          />
+          <div class="card-body">
+            <h5 class="card-title">{{ vaults.name }}</h5>
+            <p class="card-text">
+              {{ vaults.description }}
+            </p>
           </div>
         </div>
       </div>
@@ -43,7 +37,7 @@ export default {
     this.$store.dispatch("getVaults", this.$route.params.vaultId);
   },
   computed: {
-    vault() {
+    vaults() {
       return this.$store.state.vaults;
     },
   },
@@ -51,20 +45,16 @@ export default {
     deleteVault(vaultId) {
       this.$store.dispatch("deleteVault", vaultId);
     },
-    increaseVaultViews() {
-      editVault.views = editVault.view++;
-      this.$store.dispatch("increaseVaults", editVault);
-    },
+    // increaseVaultViews() {
+    //   editVault.views = editVault.view++;
+    //   this.$store.dispatch("increaseVaults", editVault);
+    // },
   },
   components: {},
 };
 </script>
 
 <style scoped>
-.fa-star {
-  color: rgb(213, 213, 92);
-}
-
 .fa-times-circle {
   color: red;
 }

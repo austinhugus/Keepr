@@ -2,36 +2,10 @@
   <div class="keep container-fluid">
     <div class="row">
       <div class="col-6">
-        <h1 class="text-center">{{ keep.name }}</h1>
-        <h3 class="text-center">{{ keep.description }}</h3>
+        <h1 class="text-center">{{ vault.name }}</h1>
+        <h3 class="text-center">{{ vault.description }}</h3>
         <div>
-          <img class="card-img-right col " :src="keep.img" alt="" />
-        </div>
-        <h3>Views:{{ keep.views }} | Keeps:{{ keep.keeps }}</h3>
-        <div>
-          <div class="dropdown">
-            <button
-              class="btn btn-secondary dropdown-toggle"
-              type="button"
-              id="dropdownMenuButton"
-              data-toggle="dropdown"
-              aria-haspopup="true"
-              aria-expanded="false"
-            >
-              Add To Vault
-            </button>
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-              <a
-                class="dropdown-item"
-                v-for="vault in vaults"
-                :key="vault.id"
-                :vaultData="vault"
-                @click="addKeepToVault(vault.id)"
-                href="#"
-                >{{ vault.name }}</a
-              >
-            </div>
-          </div>
+          <img class="card-img-right col " :src="vault.img" alt="" />
           <button
             type="button"
             class="btn btn-danger m-2"
@@ -49,7 +23,7 @@
 import Vault from "@/components/vault.vue";
 import Keep from "@/components/keep.vue";
 export default {
-  name: "keepDetails",
+  name: "vaultDetails",
   data() {
     return {
       newVaultKeep: {},
