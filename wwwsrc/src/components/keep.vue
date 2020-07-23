@@ -2,7 +2,7 @@
   <div class="keep rounded">
     <div class="border shadow m-2">
       <div class="row">
-        <div class="card text-left card-columns">
+        <div class="card text-left">
           <div>
             <i
               class="far fa-times-circle float-right pointer"
@@ -20,11 +20,6 @@
                   })
                 "
               />
-              <i
-                class="far fa-star fa-2x float-right pointer"
-                style="padding-bottom: 0%;"
-                @submit.prevent="addFav"
-              ></i>
             </div>
           </div>
         </div>

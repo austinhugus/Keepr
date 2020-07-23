@@ -6,12 +6,18 @@
         <h3 class="text-center">{{ vault.description }}</h3>
         <div>
           <img class="card-img-right col " :src="vault.img" alt="" />
+          <div
+            class="col-3"
+            v-for="vault in vaults"
+            :key="vault.id"
+            :vaultData="vault"
+          />
           <button
             type="button"
             class="btn btn-danger m-2"
             @click="deleteKeep(keepId)"
           >
-            Delete
+            Remove
           </button>
         </div>
       </div>
@@ -25,36 +31,19 @@ import Keep from "@/components/keep.vue";
 export default {
   name: "vaultDetails",
   data() {
-    return {
-      newVaultKeep: {},
-    };
+    return {};
   },
   mounted() {
-    this.$store.dispatch("getKeep", this.$route.params.keepId);
+    this.$store.dispatch("getKeepsByVaultId");
   },
   computed: {
-    keep() {
-      return this.$store.state.activeKeep;
-    },
     vault() {
-      return this.$store.state.activeVault;
-    },
-    vaults() {
-      return this.$store.state.vaults;
+      return this.$store.state.myVaultKeeps;
     },
   },
   methods: {
-    addKeepToVault(vaultId) {
-      this.$store.dispatch(
-        "addKeepToVault",
-        (this.newVaultKeep = {
-          keepId: this.keep.id,
-          vaultId: vaultId,
-        })
-      );
-    },
-    deleteKeep(keepId) {
-      this.$store.dispatch("deleteKeep", keepId);
+    getKeepsByVaultId(vaultId) {
+      this.$store.dispatch("getKeepsByVaultId", vaultId);
     },
   },
 

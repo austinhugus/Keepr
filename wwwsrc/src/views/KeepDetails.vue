@@ -2,12 +2,14 @@
   <div class="keep container-fluid">
     <div class="row">
       <div class="col-6">
-        <h1 class="text-center">{{ keep.name }}</h1>
-        <h3 class="text-center">{{ keep.description }}</h3>
+        <h1 class="text-center text-white">{{ keep.name }}</h1>
+        <h3 class="text-center text-white">{{ keep.description }}</h3>
         <div>
           <img class="card-img-right col " :src="keep.img" alt="" />
         </div>
-        <h3>Views:{{ keep.views }} | Keeps:{{ keep.keeps }}</h3>
+        <h3 class="text-white">
+          Views:{{ keep.views }} | Keeps:{{ keep.keeps }}
+        </h3>
 
         <!-- <div class="dropdown">
           <button onclick="addVaultKeep()" class="dropbtn">Dropdown</button>
@@ -18,7 +20,7 @@
         <div>
           <div class="dropdown">
             <button
-              class="btn btn-secondary dropdown-toggle"
+              class="btn btn-outline-success dropdown-toggle"
               type="button"
               id="dropdownMenuButton"
               data-toggle="dropdown"

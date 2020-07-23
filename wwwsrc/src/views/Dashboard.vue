@@ -3,9 +3,17 @@
     <div class="row justify-content-center">
       <vaultForm />
     </div>
-    <div class="row ml-5">
+    <h1 class="border-bottom text-white text-center">My Keeps</h1>
+    <keep
+      class="col-4 ml-5"
+      v-for="keep in keeps"
+      :key="keep.id"
+      :keepData="keep"
+    />
+    <h1 class="border-bottom text-white text-center">My Vaults</h1>
+    <div class="row">
       <vault
-        class="col-3"
+        class="col-4 ml-5"
         v-for="vault in vaults"
         :key="vault.id"
         :vaultData="vault"
@@ -17,6 +25,7 @@
 <script>
 import vaultForm from "@/components/vaultForm.vue";
 import Vault from "@/components/vault.vue";
+import MyKeep from "@/components/myKeeps.vue";
 export default {
   mounted() {
     this.$store.dispatch("getVaults");
@@ -29,10 +38,14 @@ export default {
     user() {
       return this.$store.state.user;
     },
+    keeps() {
+      return this.$store.statea.myKeeps;
+    },
   },
   components: {
     vaultForm,
     Vault,
+    MyKeep,
   },
 };
 </script>

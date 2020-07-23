@@ -66,8 +66,9 @@ What this site is already pretty if you follow the mocks :wink: Make sure the fe
 <!-- - Create and Delete Keeps X -->
 <!-- - Create and Delete Vaults X -->
 
-- Only Delete **things they created**
+<!-- - Only Delete **things they created** -->
 <!-- - Add Keeps to Vaults -->
+
 - Remove Keeps from Vaults
 
 ### Finished?
