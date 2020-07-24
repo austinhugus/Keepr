@@ -54,8 +54,9 @@ What this site is already pretty if you follow the mocks :wink: Make sure the fe
 <!-- - Keeps are displayed in a card like format with all data rendered X -->
 <!-- - Users have a dashboard route to see all their keeps and vaults -->
 
-- Users can only see vaults they created
+<!-- - Users can only see vaults they created -->
 <!-- - Users can View all the keeps in a given vault X -->
+
 - Anytime a `keep` is `kept in a vault` the relevant count should go up
 
 #### Functionality:

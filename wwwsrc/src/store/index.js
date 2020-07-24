@@ -130,7 +130,6 @@ export default new Vuex.Store({
     async deleteVault({ dispatch }, id) {
       try {
         await _api.delete("vaults/" + id);
-        router.push({ name: "dashboard" });
       } catch (e) {
         console.error(e);
       }
@@ -145,8 +144,8 @@ export default new Vuex.Store({
     },
     async removeKeepFromVault({ dispatch }, vaultKeep) {
       try {
-        let res = await _api.delete("/vaultkeeps", vaultKeep);
-        dispatch("setVaultKeeps", res.data);
+        let res = await _api.delete("vaultkeeps/", vaultKeep);
+        dispatch("getKeepsByVaultId", vaultKeep);
       } catch (err) {
         console.error(err);
       }

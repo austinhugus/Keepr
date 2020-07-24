@@ -6,18 +6,11 @@
         <h3 class="text-center">{{ vault.description }}</h3>
         <div>
           <keep
-            class="col-3"
+            class="col-6"
             v-for="keep in keeps"
             :key="keep.id"
             :keepData="keep"
           />
-          <button
-            type="button"
-            class="btn btn-danger m-2"
-            @click="removeKeepFromVault(keepId)"
-          >
-            Remove
-          </button>
         </div>
       </div>
     </div>

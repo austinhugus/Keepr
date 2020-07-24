@@ -20,6 +20,10 @@
               "
             />
           </div>
+          <i
+            class="fas fa-trash float-right pointer"
+            @click="removeKeepFromVault"
+          ></i>
         </div>
       </div>
     </div>
@@ -47,6 +51,15 @@ export default {
   methods: {
     deleteKeep(keepId) {
       this.$store.dispatch("deleteKeep", keepId);
+    },
+    removeKeepFromVault(keepId) {
+      this.$store.dispatch(
+        "removeKeepFromVault",
+        (this.vaultKeep = {
+          vaultKeepId: this.keep.vaultKeepId,
+          vaultId: this.vaultId,
+        })
+      );
     },
     // increaseKeepViews() {
     //   editKeep.views = editKeep.view + 1;
