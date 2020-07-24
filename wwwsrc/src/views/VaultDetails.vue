@@ -1,16 +1,15 @@
 <template>
-  <div class="keep container-fluid">
+  <div class="VaultDetails container-fluid">
     <div class="row">
       <div class="col-6">
         <h1 class="text-center">{{ vault.name }}</h1>
         <h3 class="text-center">{{ vault.description }}</h3>
         <div>
-          <img class="card-img-right col " :src="vault.img" alt="" />
-          <vault
+          <keep
             class="col-3"
-            v-for="vault in vaults"
-            :key="vault.id"
-            :vaultData="vault"
+            v-for="keep in keeps"
+            :key="keep.id"
+            :keepData="keep"
           />
           <button
             type="button"
@@ -29,24 +28,29 @@
 import Vault from "@/components/vault.vue";
 import Keep from "@/components/keep.vue";
 export default {
-  name: "vaultDetails",
+  name: "VaultDetails",
+  props: ["vaultDetails"],
   data() {
     return {};
   },
   mounted() {
-    this.$store.dispatch("getKeepsByVaultId", this.$route.params.id);
+    this.$store.dispatch("getKeepsByVaultId", this.$route.params.vaultId);
+    this.$store.dispatch("getVaultById", this.$route.params.vaultId);
   },
   computed: {
     vault() {
-      return this.$store.state.myVaults;
+      return this.$store.state.activeVault;
     },
-    vaults() {
-      return this.$store.state.myVaults;
+    keeps() {
+      return this.$store.state.myVaultKeeps;
+    },
+    user() {
+      return this.$store.state.user;
     },
   },
   methods: {
-    getKeepsByVaultId() {
-      this.$store.dispatch("getKeepsByVaultId", { vaultId: this.vaultData.id });
+    deleteKeep(keepId) {
+      this.$store.dispatch("deleteKeep", keepId);
     },
   },
 

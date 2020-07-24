@@ -42,6 +42,9 @@ export default {
     keep() {
       return this.$store.state.keeps;
     },
+    user() {
+      return this.$store.state.user;
+    },
   },
   methods: {
     deleteKeep(keepId) {

@@ -65,6 +65,7 @@ export default {
     };
   },
   mounted() {
+    this.$store.dispatch("getVault");
     this.$store.dispatch("getKeep", this.$route.params.keepId);
   },
   computed: {
