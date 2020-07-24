@@ -2,20 +2,22 @@
   <div class="home container-fluid">
     <div class="row">
       <div class="col text-center">
-        <h1 class="text-white">Welcome To KeepR</h1>
+        <h1 class="text-white border-bottom">Welcome To KeepR</h1>
       </div>
     </div>
     <div class="row justify-content-center">
       <keepForm />
     </div>
-    <div class="col-12">
-      <div class="ml-5">
-        <keep
-          class="col-6"
-          v-for="keep in keeps"
-          :key="keep.id"
-          :keepData="keep"
-        />
+    <div class="row">
+      <div class="col-12">
+        <div class="ml-5">
+          <keep
+            class="col-6"
+            v-for="keep in keeps"
+            :key="keep.id"
+            :keepData="keep"
+          />
+        </div>
       </div>
     </div>
   </div>

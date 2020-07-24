@@ -113,7 +113,7 @@ export default new Vuex.Store({
     async deleteKeep({ dispatch }, id) {
       try {
         await _api.delete("keeps/" + id);
-        router.push({ name: "/home" });
+        // router.push({ name: "/home" });
         console.log("deleted");
       } catch (e) {
         console.error(e);
