@@ -42,7 +42,7 @@ export default {
     return {};
   },
   mounted() {
-    this.$store.dispatch("getMyVault", this.$route.params.vaultId);
+    this.$store.dispatch("getMyVaults", this.$route.params.vaultId);
   },
   computed: {
     vaults() {

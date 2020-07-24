@@ -4,57 +4,47 @@ using System.Data;
 using Dapper;
 using keepr.Models;
 
-namespace keepr.Repositories
-{
-    public class VaultsRepository
-    {
+namespace keepr.Repositories {
+    public class VaultsRepository {
         private readonly IDbConnection _db;
-        public VaultsRepository(IDbConnection db)
-        {
+        public VaultsRepository (IDbConnection db) {
             _db = db;
         }
-        public Vault GetById(int id, string userId)
-        {
+        public Vault GetById (int id, string userId) {
             string sql = "SELECT * FROM vaults WHERE id = @id AND userId = @userId";
-            return _db.QueryFirstOrDefault<Vault>(sql, new { id, userId });
+            return _db.QueryFirstOrDefault<Vault> (sql, new { id, userId });
         }
 
-        internal IEnumerable<Vault> GetByUserId(string userId)
-        {
-            string sql = "SELECT * FROM vaults WHERE id = @id AND userId = @userId";
-            return _db.Query<Vault>(sql, new { userId });
+        internal IEnumerable<Vault> GetByUserId (string userId) {
+            string sql = "SELECT * FROM vaults WHERE userId = @userId";
+            return _db.Query<Vault> (sql, new { userId });
         }
 
-        internal Vault Get(int id)
-        {
+        internal Vault Get (int id) {
             string sql = "SELECT * FROM vaults WHERE id = @id";
-            return _db.QueryFirstOrDefault<Vault>(sql, new { id });
+            return _db.QueryFirstOrDefault<Vault> (sql, new { id });
         }
 
-
-        internal Vault Create(Vault vaultInfo)
-        {
+        internal Vault Create (Vault vaultInfo) {
             string sql = @"
             INSERT INTO vaults
             (name, description, userId)
             VALUES
             (@Name, @Description, @UserId);
             SELECT LAST_INSERT_ID()";
-            vaultInfo.Id = _db.ExecuteScalar<int>(sql, vaultInfo);
+            vaultInfo.Id = _db.ExecuteScalar<int> (sql, vaultInfo);
             return vaultInfo;
         }
 
-        internal bool Delete(int id, string userId)
-        {
+        internal bool Delete (int id, string userId) {
             string sql = "DELETE FROM vaults WHERE id = @id AND userId = @userId LIMIT 1";
-            int affectedRows = _db.Execute(sql, new { id, userId });
+            int affectedRows = _db.Execute (sql, new { id, userId });
             return affectedRows == 1;
         }
 
-        internal IEnumerable<Vault> Get()
-        {
+        internal IEnumerable<Vault> Get () {
             string sql = @"SELECT * FROM vaults";
-            return _db.Query<Vault>(sql);
+            return _db.Query<Vault> (sql);
         }
     }
 }

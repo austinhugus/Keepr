@@ -48,7 +48,7 @@ export default new Vuex.Store({
     setVault(state, vault) {
       state.activeVault = vault;
     },
-    setMyVault(state, vaults) {
+    setMyVaults(state, vaults) {
       state.myVaults = vaults;
     },
     setVaults(state, vaults) {
@@ -119,11 +119,10 @@ export default new Vuex.Store({
         console.error(e);
       }
     },
-    async createVault({ commit, state }, newVault) {
+    async createVault({ commit, dispatch }, newVault) {
       try {
         let res = await _api.post("vaults", newVault);
-        let vaults = [...state.myVaults, res.data];
-        commit("getMyVault", vaults);
+        dispatch("getMyVaults");
       } catch (e) {
         console.error(e);
       }
@@ -187,10 +186,10 @@ export default new Vuex.Store({
         console.error(e);
       }
     },
-    async getMyVault({ commit, dispatch }) {
+    async getMyVaults({ commit, dispatch }) {
       try {
-        let res = await _api.get("vaults");
-        commit("setMyVault", res.data);
+        let res = await _api.get("vaults/user");
+        commit("setMyVaults", res.data);
       } catch (e) {
         console.error(e);
       }

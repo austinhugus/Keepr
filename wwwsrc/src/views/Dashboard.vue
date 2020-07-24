@@ -32,7 +32,7 @@ import Vault from "@/components/vault.vue";
 import Keep from "@/components/keep.vue";
 export default {
   mounted() {
-    this.$store.dispatch("getMyVault");
+    this.$store.dispatch("getMyVaults");
     this.$store.dispatch("getMyKeeps");
   },
   computed: {
