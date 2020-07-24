@@ -33,7 +33,7 @@ export default new Router({
     },
     {
       path: "/vaults/:vaultId",
-      name: "vaults",
+      name: "vaultDetails",
       component: VaultDetails,
       beforeEnter: authGuard,
     },

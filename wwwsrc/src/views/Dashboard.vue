@@ -4,18 +4,20 @@
       <vaultForm />
     </div>
     <h1 class="border-bottom text-white text-center">My Keeps</h1>
-    <div class="row">
-      <keep
-        class="col-4 ml-5"
-        v-for="keep in keeps"
-        :key="keep.id"
-        :keepData="keep"
-      />
+    <div class="col">
+      <div class="row">
+        <keep
+          class=" ml-5"
+          v-for="keep in keeps"
+          :key="keep.id"
+          :keepData="keep"
+        />
+      </div>
+      <h1 class="border-bottom text-white text-center">My Vaults</h1>
     </div>
-    <h1 class="border-bottom text-white text-center">My Vaults</h1>
-    <div class="row">
+    <div class="col-12">
       <vault
-        class="col-4 ml-5"
+        class="ml-5"
         v-for="vault in vaults"
         :key="vault.id"
         :vaultData="vault"

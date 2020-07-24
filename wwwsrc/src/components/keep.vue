@@ -3,24 +3,22 @@
     <div class="border shadow m-2">
       <div class="row">
         <div class="card text-left">
+          <i
+            class="far fa-times-circle float-right pointer"
+            @click="deleteKeep(keepData.id)"
+          ></i>
           <div>
-            <i
-              class="far fa-times-circle float-right pointer"
-              @click="deleteKeep(keepData.id)"
-            ></i>
-            <div>
-              <img
-                class="card-img-top"
-                :src="keepData.img"
-                alt=""
-                @click="
-                  $router.push({
-                    name: 'keepDetails',
-                    params: { keepId: keepData.id },
-                  })
-                "
-              />
-            </div>
+            <img
+              class="card-img-top"
+              :src="keepData.img"
+              alt=""
+              @click="
+                $router.push({
+                  name: 'keepDetails',
+                  params: { keepId: keepData.id },
+                })
+              "
+            />
           </div>
         </div>
       </div>

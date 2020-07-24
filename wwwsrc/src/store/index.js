@@ -60,8 +60,8 @@ export default new Vuex.Store({
     setActiveVault(state, vault) {
       state.activeKeep = vault;
     },
-    setVaultKeeps(state, vaults) {
-      state.myVaultKeeps = vaults;
+    setVaultKeeps(state, vaultKeeps) {
+      state.myVaultKeeps = vaultKeeps;
     },
   },
   actions: {
@@ -105,6 +105,7 @@ export default new Vuex.Store({
       try {
         let res = await _api.post("keeps", newKeep);
         commit("setNewKeep", res.data);
+        dispatch("getkeeps");
       } catch (error) {
         console.error(error);
       }
@@ -122,7 +123,7 @@ export default new Vuex.Store({
       try {
         let res = await _api.post("vaults", newVault);
         let vaults = [...state.myVaults, res.data];
-        commit("setMyVault", vaults);
+        commit("getMyVault", vaults);
       } catch (e) {
         console.error(e);
       }

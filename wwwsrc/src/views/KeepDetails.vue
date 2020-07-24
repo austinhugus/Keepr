@@ -65,7 +65,6 @@ export default {
     };
   },
   mounted() {
-    this.$store.dispatch("getVault");
     this.$store.dispatch("getKeep", this.$route.params.keepId);
   },
   computed: {
@@ -76,7 +75,7 @@ export default {
       return this.$store.state.activeVault;
     },
     vaults() {
-      return this.$store.state.vaults;
+      return this.$store.state.myVaults;
     },
   },
   methods: {

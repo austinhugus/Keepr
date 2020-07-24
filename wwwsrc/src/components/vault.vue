@@ -1,26 +1,32 @@
 <template>
   <div class="Vault rounded">
     <div class="border shadow m-2">
-      <div class="row">
-        <div class="card text-left">
+      <div class="card ">
+        <div>
+          <i
+            class="far fa-times-circle float-right pointer"
+            @click="deleteVault(vaultData.id)"
+          ></i>
           <div>
-            <i
-              class="far fa-times-circle float-right pointer"
-              @click="deleteVault(vaultData.id)"
-            ></i>
-            <div>
-              <button
-                @click="
-                  $router.push({
-                    name: 'vaultDetails',
-                    params: { vaultId: vaultData.id },
-                  })
-                "
-              >
-                Enter Vault
-              </button>
-              <img class="card-img-top" :src="vaultData.img" alt="" />
-            </div>
+            <img
+              class="card-img-top"
+              :src="vaultData.Img"
+              width="200px"
+              height="100px"
+            />
+            <h5>{{ vaultData.name }}</h5>
+            <button
+              class="text-bottom"
+              @click="
+                $router.push({
+                  name: 'vaultDetails',
+                  params: { vaultId: vaultData.id },
+                })
+              "
+            >
+              Enter Vault
+            </button>
+            <img class="card-img-top" :src="vaultData.img" alt="" />
           </div>
         </div>
       </div>
@@ -40,7 +46,7 @@ export default {
   },
   computed: {
     vaults() {
-      return this.$store.state.vaults;
+      return this.$store.state.myVaults;
     },
   },
   methods: {

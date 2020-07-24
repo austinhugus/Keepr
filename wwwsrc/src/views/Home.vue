@@ -8,13 +8,15 @@
     <div class="row justify-content-center">
       <keepForm />
     </div>
-    <div class="row ml-5">
-      <keep
-        class="col-3"
-        v-for="keep in keeps"
-        :key="keep.id"
-        :keepData="keep"
-      />
+    <div class="col-12">
+      <div class="ml-5">
+        <keep
+          class="col-6"
+          v-for="keep in keeps"
+          :key="keep.id"
+          :keepData="keep"
+        />
+      </div>
     </div>
   </div>
 </template>
