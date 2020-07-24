@@ -36,7 +36,7 @@ export default {
     return {};
   },
   mounted() {
-    this.$store.dispatch("getVaults", this.$route.params.vaultId);
+    this.$store.dispatch("getMyVault", this.$route.params.vaultId);
   },
   computed: {
     vaults() {
@@ -47,10 +47,6 @@ export default {
     deleteVault(vaultId) {
       this.$store.dispatch("deleteVault", vaultId);
     },
-    // increaseVaultViews() {
-    //   editVault.views = editVault.view++;
-    //   this.$store.dispatch("increaseVaults", editVault);
-    // },
   },
   components: {},
 };

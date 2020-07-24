@@ -14,7 +14,7 @@
           <button
             type="button"
             class="btn btn-danger m-2"
-            @click="deleteKeep(keepId)"
+            @click="removeKeepFromVault(keepId)"
           >
             Remove
           </button>
@@ -49,8 +49,8 @@ export default {
     },
   },
   methods: {
-    deleteKeep(keepId) {
-      this.$store.dispatch("deleteKeep", keepId);
+    removeKeepFromVault(keepId) {
+      this.$store.dispatch("setVaultKeeps", keepId);
     },
   },
 

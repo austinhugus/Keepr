@@ -29,11 +29,13 @@ export default new Router({
       path: "/keeps/:keepId",
       name: "keepDetails",
       component: KeepDetails,
+      beforeEnter: authGuard,
     },
     {
       path: "/vaults/:vaultId",
-      name: "vaultDetails",
+      name: "vaults",
       component: VaultDetails,
+      beforeEnter: authGuard,
     },
   ],
 });
