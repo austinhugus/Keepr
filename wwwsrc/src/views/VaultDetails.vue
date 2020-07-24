@@ -38,10 +38,10 @@ export default {
   },
   computed: {
     vault() {
-      return this.$store.state.myVaultKeeps;
+      return this.$store.state.myVaults;
     },
     vaults() {
-      return this.$store.state.myVaultKeeps;
+      return this.$store.state.myVaults;
     },
   },
   methods: {

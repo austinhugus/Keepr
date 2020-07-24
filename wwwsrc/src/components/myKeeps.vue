@@ -1,5 +1,5 @@
 <template>
-  <div class="MyKeep">
+  <div class="my-keep">
     <div class="card text-left">
       <img class="card-img-top" src="holder.js/100px180/" alt="" />
       <div class="card-body">
@@ -13,7 +13,7 @@
 <script>
 export default {
   name: "MyKeep",
-  props: ["keepData"],
+  props: ["mykeep"],
   data() {
     return {};
   },

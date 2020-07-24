@@ -27,27 +27,27 @@
 <script>
 import vaultForm from "@/components/vaultForm.vue";
 import Vault from "@/components/vault.vue";
-import MyKeep from "@/components/myKeeps.vue";
+import Keep from "@/components/keep.vue";
 export default {
   mounted() {
-    this.$store.dispatch("getVaults");
+    this.$store.dispatch("getVault");
     this.$store.dispatch("getMyKeeps");
   },
   computed: {
     vaults() {
-      return this.$store.state.vaults;
+      return this.$store.state.myVaults;
     },
     user() {
       return this.$store.state.user;
     },
-    keep() {
+    keeps() {
       return this.$store.state.myKeeps;
     },
   },
   components: {
     vaultForm,
     Vault,
-    MyKeep,
+    Keep,
   },
 };
 </script>
