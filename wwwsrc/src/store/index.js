@@ -18,9 +18,10 @@ let _api = Axios.create({
 export default new Vuex.Store({
   state: {
     keeps: [],
-    vaults: [],
-    privateKeeps: [],
     myKeeps: [],
+    privateKeeps: [],
+    vaults: [],
+    myVaults: [],
     myVaultKeeps: [],
     activeKeep: {},
     activeVault: {},
@@ -35,6 +36,9 @@ export default new Vuex.Store({
     setMyKeeps(state, keeps) {
       state.myKeeps = keeps;
     },
+    setNewKeep(state, keep) {
+      state.myKeeps.push(keep);
+    },
     setActiveKeep(state, keep) {
       state.activeKeep = keep;
     },
@@ -44,8 +48,14 @@ export default new Vuex.Store({
     setVault(state, vault) {
       state.activeVault = vault;
     },
+    setMyVault(state, vault) {
+      state.myVaults = vault;
+    },
     setVaults(state, vaults) {
       state.vaults = vaults;
+    },
+    setNewVault(state, vault) {
+      state.myVaults = vault;
     },
     removeVault(state, id) {
       state.vaults = state.vaults.filter((v) => v.id != id);
@@ -97,7 +107,7 @@ export default new Vuex.Store({
     async createKeep({ commit, dispatch }, newKeep) {
       try {
         let res = await _api.post("keeps", newKeep);
-        commit("setKeep", res.data);
+        commit("setNewKeep", res.data);
       } catch (error) {
         console.error(error);
       }
@@ -115,7 +125,7 @@ export default new Vuex.Store({
       try {
         let res = await _api.post("vaults", newVault);
         let vaults = [...state.vaults, res.data];
-        commit("setVaults", vaults);
+        commit("setNewVault", vaults);
       } catch (e) {
         console.error(e);
       }
@@ -139,7 +149,7 @@ export default new Vuex.Store({
     async removeKeepFromVault({ dispatch }, vaultKeep) {
       try {
         let res = await _api.delete("/vaultkeeps", vaultKeep);
-        dispatch("getMyVaultKeeps");
+        dispatch("setVaultKeeps", res.data);
       } catch (err) {
         console.error(err);
       }
@@ -175,6 +185,14 @@ export default new Vuex.Store({
       try {
         let res = await _api.get("vaults/" + id);
         commit("setActiveVault", res.data);
+      } catch (e) {
+        console.error(e);
+      }
+    },
+    async getVault({ commit, dispatch }) {
+      try {
+        let res = await _api.get("vaults");
+        commit("setMyVault", res.data);
       } catch (e) {
         console.error(e);
       }
