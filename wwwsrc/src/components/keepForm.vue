@@ -26,10 +26,17 @@
           placeholder="Img..."
           v-model="newKeep.Img"
           required
-        />    
-      </div class="form-group">
-      <button type="submit" class="btn btn-primary">Post</button>
-    </form>
+          />
+      </div>
+          <div class="form-group">
+            <div class="form-check">
+              <input type="checkbox" class="form-check-input" id="exampleCheck1" v-model="newKeep.isPrivate">
+              <label class="form-check-label" for="exampleCheck1">Check to make Private</label>
+            </div class="form-group">
+            <button type="submit" class="btn btn-primary">Post</button>
+          </div>
+          
+          </form>
   </div>
 </template>
 
@@ -38,7 +45,9 @@ export default {
   name: "keepForm",
   data() {
     return {
-      newKeep: {},
+      newKeep: {
+        isPrivate: false
+      },
     };
   },
   computed: {

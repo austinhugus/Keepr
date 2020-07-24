@@ -34,7 +34,7 @@ export default {
     return {};
   },
   mounted() {
-    this.$store.dispatch("getKeepsByVaultId", vaultId);
+    this.$store.dispatch("getKeepsByVaultId", this.$route.params.id);
   },
   computed: {
     vault() {
